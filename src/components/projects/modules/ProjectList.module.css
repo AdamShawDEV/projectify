@@ -1,0 +1,58 @@
+.listContainer {
+  padding: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.projectContainer {
+  background-color: #fff;
+  min-width: 15rem;
+  padding: 0.4rem;
+  flex-grow: 1;
+  box-shadow: 0.4rem 0.4rem 0 black;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.projectContainer:hover {
+  transform: scale(102.5%);
+  box-shadow: 0.6rem 0.6rem 0 black;
+}
+
+.titleWrapper {
+  background-color: #2fcc71ff;
+  margin: -0.4rem -0.4rem 0 -0.4rem;
+  padding: 0.4rem;
+}
+
+.projectContainer h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.projectContainer h3 {
+  margin: 0.2rem 0;
+  font-size: 1.2rem;
+}
+
+.taskContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.task {
+  display: flex;
+  align-items: stretch;
+  background-color: #f2f2f2ff;
+}
+
+.task span {
+  margin: 0.4rem 0;
+}
+
+.taskAccent {
+  display: inline-block;
+  margin-right: 0.4rem;
+  width: 0.4rem;
+}
