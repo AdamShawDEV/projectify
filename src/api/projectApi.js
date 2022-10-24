@@ -3,8 +3,8 @@ import { projects } from "../mockData";
 
 async function getProjects() {
   await delay(2000);
-
-  return projects;
+  // api call goes here
+  return Promise.resolve(projects);
 }
 
 export { getProjects };

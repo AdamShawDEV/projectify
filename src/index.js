@@ -3,12 +3,10 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import configureStore from "./redux/configureStore";
+import store from "./redux/configureStore";
 import { Provider as ReduxProvider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import { PageTitleProvider } from "./components/hooks/pageTitleContext";
-
-const store = configureStore();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

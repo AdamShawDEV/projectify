@@ -1,37 +1,45 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import * as projectActions from "../../redux/actions/projectActions";
-import * as taskActions from "../../redux/actions/taskActions";
-import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  loadProjects,
+  selectAllProjects,
+  selectProjectStatus,
+} from "../../redux/slices/projectSlice";
+import {
+  loadTasks,
+  selectAllTasks,
+  selectTaskStatus,
+} from "../../redux/slices/taskSlice";
 import ProjectList from "./ProjectList";
 import { usePageTitle } from "../hooks/pageTitleContext";
 
-function ProjectsPage({ projects, tasks, loadProjects, loadTasks }) {
+function ProjectsPage() {
   const { setPageTitle } = usePageTitle();
+  const dispatch = useDispatch();
+  const projects = useSelector(selectAllProjects);
+  const projectStatus = useSelector(selectProjectStatus);
+  const tasks = useSelector(selectAllTasks);
+  const taskStatus = useSelector(selectTaskStatus);
 
   useEffect(() => {
     setPageTitle("Projects");
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    if (projects.length === 0) {
-      try {
-        loadProjects();
-      } catch (error) {
-        throw error;
-      }
+    if (projectStatus === "idle") {
+      dispatch(loadProjects());
     }
 
-    if (Object.keys(tasks).length === 0) {
-      try {
-        loadTasks();
-      } catch (error) {
-        throw error;
-      }
+    if (taskStatus === "idle") {
+      dispatch(loadTasks());
     }
 
     // eslint-disable-next-line
   }, []);
+
+  if (projectStatus === "loading" || taskStatus === "loading")
+    return "loading...";
 
   return (
     <>
@@ -41,23 +49,4 @@ function ProjectsPage({ projects, tasks, loadProjects, loadTasks }) {
   );
 }
 
-ProjectsPage.propTypes = {
-  projects: PropTypes.array.isRequired,
-  tasks: PropTypes.object.isRequired,
-  loadProjects: PropTypes.func.isRequired,
-  loadTasks: PropTypes.func.isRequired,
-};
-
-const mapDispaatchToProps = {
-  loadProjects: projectActions.loadProjects,
-  loadTasks: taskActions.loadTasks,
-};
-
-function mapStateToProps(state, ownProps) {
-  return {
-    projects: state.projects,
-    tasks: state.tasks,
-  };
-}
-
-export default connect(mapStateToProps, mapDispaatchToProps)(ProjectsPage);
+export default ProjectsPage;
