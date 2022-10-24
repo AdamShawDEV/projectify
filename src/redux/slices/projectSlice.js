@@ -7,6 +7,20 @@ const loadProjects = createAsyncThunk("project/loadProjects", async () => {
   return response;
 });
 
+const addProject = createAsyncThunk("project/addProject", async (project) => {
+  const response = await projectApi.saveProject(project);
+  return response;
+});
+
+const updateProject = createAsyncThunk(
+  "project/updateProject",
+  async (project) => {
+    const response = await projectApi.saveProject(project);
+    console.log(project, response);
+    return response;
+  }
+);
+
 const projectSlice = createSlice({
   name: "project",
   initialState: initialState.projects,
@@ -31,7 +45,20 @@ const projectSlice = createSlice({
         ...state,
         status: "failed",
         error: action.error.message,
-      }));
+      }))
+      .addCase(addProject.fulfilled, (state, action) => ({
+        ...state,
+        data: [...state.data, action.payload],
+      }))
+      .addCase(updateProject.fulfilled, (state, action) => {
+        console.log(action.payload);
+        return {
+          ...state,
+          data: state.data.map((project) =>
+            project.id === action.payload.id ? action.payload : project
+          ),
+        };
+      });
   },
 });
 
@@ -45,6 +72,8 @@ const selectProjectStatus = (state) => state.projects.status;
 export default projectSlice.reducer;
 export {
   loadProjects,
+  addProject,
+  updateProject,
   selectAllProjects,
   selectProjectById,
   selectProjectStatus,
