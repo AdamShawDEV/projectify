@@ -1,10 +1,12 @@
 import React from "react";
-import { usePageTitle } from "./hooks/pageTitleContext";
+import styles from "./modules/Header.module.css";
 
 function Header() {
-  const { pageTitle } = usePageTitle();
-
-  return <header>{pageTitle}</header>;
+  return (
+    <header className={styles.header}>
+      <h1>Projectify</h1>
+    </header>
+  );
 }
 
 export default Header;

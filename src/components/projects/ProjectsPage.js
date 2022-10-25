@@ -11,20 +11,13 @@ import {
   selectTaskStatus,
 } from "../../redux/slices/taskSlice";
 import ProjectList from "./ProjectList";
-import { usePageTitle } from "../hooks/pageTitleContext";
 
 function ProjectsPage() {
-  const { setPageTitle } = usePageTitle();
   const dispatch = useDispatch();
   const projects = useSelector(selectAllProjects);
   const projectStatus = useSelector(selectProjectStatus);
   const tasks = useSelector(selectAllTasks);
   const taskStatus = useSelector(selectTaskStatus);
-
-  useEffect(() => {
-    setPageTitle("Projects");
-    // eslint-disable-next-line
-  }, []);
 
   useEffect(() => {
     if (projectStatus === "idle") {

@@ -6,16 +6,13 @@ import reportWebVitals from "./reportWebVitals";
 import store from "./redux/configureStore";
 import { Provider as ReduxProvider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
-import { PageTitleProvider } from "./components/hooks/pageTitleContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ReduxProvider store={store}>
       <Router>
-        <PageTitleProvider>
-          <App />
-        </PageTitleProvider>
+        <App />
       </Router>
     </ReduxProvider>
   </React.StrictMode>

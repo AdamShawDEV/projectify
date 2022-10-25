@@ -1,0 +1,17 @@
+.columnsContainer {
+  display: flex;
+  height: 100%;
+}
+
+.columnsLeft {
+  position: relative;
+  background-color: white;
+  padding: 0.4rem;
+  flex-basis: 15rem;
+  box-shadow: 0.4rem 0 0 black;
+}
+
+.columnsRight {
+  flex-grow: 1;
+  padding: 0.4rem;
+}

@@ -1,0 +1,15 @@
+.task {
+  display: flex;
+  align-items: stretch;
+  background-color: #f2f2f2ff;
+}
+
+.task span {
+  margin: 0.4rem 0;
+}
+
+.taskAccent {
+  display: inline-block;
+  margin-right: 0.4rem;
+  width: 0.4rem;
+}
