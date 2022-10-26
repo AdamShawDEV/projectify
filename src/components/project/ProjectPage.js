@@ -13,8 +13,8 @@ import {
   selectTaskStatus,
 } from "../../redux/slices/taskSlice";
 import TaskList from "./TaskList";
-import Button from "../common/Button";
-import { GoPlus } from "react-icons/go";
+import { taskStatusEnum } from "../../consts";
+import { MdOutlineAdd } from "react-icons/md";
 
 function ProjectPage() {
   const { projectId } = useParams();
@@ -36,32 +36,38 @@ function ProjectPage() {
   if (projectStatus !== "succeeded" || taskStatus !== "succeeded")
     return "loading...";
 
-  const activeTasks = tasks
-    ? tasks.filter((task) => task.status !== "completed")
+  const pendingTasks = tasks
+    ? tasks.filter((task) => task.status === taskStatusEnum.PENDING)
     : [];
-  const completedTasks = tasks
-    ? tasks.filter((task) => task.status === "completed")
+  const activeTassks = tasks
+    ? tasks.filter((task) => task.status === taskStatusEnum.ACTIVE)
+    : [];
+  const completedTassks = tasks
+    ? tasks.filter((task) => task.status === taskStatusEnum.COMPLETED)
     : [];
 
   return (
     <div className={styles.columnsContainer}>
-      <div className={styles.columnsLeft}>
-        <Button>
-          add task <GoPlus />
-        </Button>
+      <div className={`${styles.column} ${styles.pendingColumn}`}>
+        <div className={styles.colomnHeading}>Pending</div>
+        <TaskList tasks={pendingTasks} />
+        <button className={styles.addButton}>
+          <MdOutlineAdd />
+        </button>
       </div>
-      <div className={styles.columnsRight}>
-        <h1>{project.title}</h1>
-        {tasks ? (
-          <>
-            <h2>Active Tasks</h2>
-            <TaskList tasks={activeTasks} />
-            <h2>Completed Tasks</h2>
-            <TaskList tasks={completedTasks} />
-          </>
-        ) : (
-          <h2>No Tasks</h2>
-        )}
+      <div className={`${styles.column} ${styles.activeColumn}`}>
+        <div className={styles.colomnHeading}>Active</div>
+        <TaskList tasks={activeTassks} />
+        <button className={styles.addButton}>
+          <MdOutlineAdd />
+        </button>
+      </div>
+      <div className={`${styles.column} ${styles.completedColumn}`}>
+        <div className={styles.colomnHeading}>Completed</div>
+        <TaskList tasks={completedTassks} />
+        <button className={styles.addButton}>
+          <MdOutlineAdd />
+        </button>
       </div>
     </div>
   );

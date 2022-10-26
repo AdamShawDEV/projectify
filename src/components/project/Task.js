@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./modules/Task.module.css";
 import Button from "../common/Button";
+import { BiMessageSquareDetail } from "react-icons/bi";
 
 function Task({ task }) {
   const [displayButtons, setDisplayButtons] = useState(false);
@@ -11,43 +12,16 @@ function Task({ task }) {
       className={styles.task}
       onClick={() => setDisplayButtons((current) => !current)}
     >
-      <div className={styles.titleGroup}>
-        <div
-          style={{ backgroundColor: task.color }}
-          className={styles.taskAccent}
-        ></div>
-        <span>{task.title}</span>
+      <div className={styles.heading}>
+        <h2>{task.title}</h2>
+        <div className={styles.peopleContainer}>
+          <div className={styles.portrait}></div>
+        </div>
       </div>
-      <div className={styles.statusContainer}>
-        <div
-          className={styles.status}
-          style={{
-            backgroundColor:
-              task.status === "pending" ? "#fddd0eff" : "#2fcc71ff",
-          }}
-        >
-          pending
-        </div>
-        <div
-          className={styles.status}
-          style={{
-            backgroundColor:
-              task.status === "in progress"
-                ? "#fddd0eff"
-                : task.status === "completed"
-                ? "#2fcc71ff"
-                : "#fff",
-          }}
-        >
-          in-progress
-        </div>
-        <div
-          className={styles.status}
-          style={{
-            backgroundColor: task.status === "completed" ? "#2fcc71ff" : "#fff",
-          }}
-        >
-          complete
+      <p>{task.details}</p>
+      <div className={styles.notificationArea}>
+        <div className={styles.notification}>
+          <BiMessageSquareDetail /> 3
         </div>
       </div>
       {displayButtons && (

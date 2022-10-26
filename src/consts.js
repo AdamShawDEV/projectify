@@ -1,6 +1,6 @@
-export const taskStatus = {
+export const taskStatusEnum = {
   PENDING: "pending",
   ACTIVE: "active",
-  COMPLETE: "complete",
+  COMPLETED: "completed",
   CONCELED: "canceled",
 };

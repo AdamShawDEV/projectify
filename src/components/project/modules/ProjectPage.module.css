@@ -3,17 +3,41 @@
   height: 100%;
 }
 
-.columnsLeft {
-  position: relative;
+.column {
   display: flex;
   flex-direction: column;
-  background-color: white;
-  padding: 0.4rem;
-  flex-basis: 10rem;
-  box-shadow: 0.1rem 0 0 #cacacaff;
+  width: 33.33%;
 }
 
-.columnsRight {
-  flex-grow: 1;
-  padding: 0.4rem;
+.pendingColumn {
+  background-color: #cacacaff;
+}
+.activeColumn {
+  background-color: #fddd0eff;
+}
+
+.completedColumn {
+  background-color: #2fcc71ff;
+}
+
+.colomnHeading {
+  color: #f6f6f6ff;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 1.5rem;
+  background-color: rgba(137, 137, 137, 0.509);
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  color: #cacacaff;
+  font-size: 2.5rem;
+  margin: 0 auto;
+  border: none;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
 }
