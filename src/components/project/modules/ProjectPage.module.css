@@ -5,10 +5,12 @@
 
 .columnsLeft {
   position: relative;
+  display: flex;
+  flex-direction: column;
   background-color: white;
   padding: 0.4rem;
-  flex-basis: 15rem;
-  box-shadow: 0.4rem 0 0 black;
+  flex-basis: 10rem;
+  box-shadow: 0.1rem 0 0 #cacacaff;
 }
 
 .columnsRight {

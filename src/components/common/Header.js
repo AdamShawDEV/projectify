@@ -4,7 +4,8 @@ import styles from "./modules/Header.module.css";
 function Header() {
   return (
     <header className={styles.header}>
-      <h1>Projectify</h1>
+      <span className={styles.logo}>Projectify</span>
+      <div className={styles.about}></div>
     </header>
   );
 }

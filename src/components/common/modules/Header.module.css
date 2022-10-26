@@ -1,0 +1,24 @@
+.header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  background-color: #f2f2f2ff;
+  padding: 0.4rem;
+  box-shadow: 0 0.1rem 0 #cacacaff;
+}
+
+.logo {
+  color: #cacacaff;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.about {
+  background-color: red;
+  align-self: stretch;
+  width: 2rem;
+}
+
+.header > h1 {
+  margin: 0;
+}

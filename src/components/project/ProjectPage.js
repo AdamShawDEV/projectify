@@ -13,6 +13,8 @@ import {
   selectTaskStatus,
 } from "../../redux/slices/taskSlice";
 import TaskList from "./TaskList";
+import Button from "../common/Button";
+import { GoPlus } from "react-icons/go";
 
 function ProjectPage() {
   const { projectId } = useParams();
@@ -31,14 +33,11 @@ function ProjectPage() {
     }
   }, [projectStatus, taskStatus, dispatch]);
 
-  if (projectStatus === "loading" || taskStatus === "loading")
+  if (projectStatus !== "succeeded" || taskStatus !== "succeeded")
     return "loading...";
 
-  const pendingTasks = tasks
-    ? tasks.filter((task) => task.status === "pending")
-    : [];
-  const inProgressTask = tasks
-    ? tasks.filter((task) => task.status === "in progress")
+  const activeTasks = tasks
+    ? tasks.filter((task) => task.status !== "completed")
     : [];
   const completedTasks = tasks
     ? tasks.filter((task) => task.status === "completed")
@@ -47,16 +46,16 @@ function ProjectPage() {
   return (
     <div className={styles.columnsContainer}>
       <div className={styles.columnsLeft}>
-        <button>add task</button>
+        <Button>
+          add task <GoPlus />
+        </Button>
       </div>
       <div className={styles.columnsRight}>
         <h1>{project.title}</h1>
         {tasks ? (
           <>
-            <h2>In Progress Tasks</h2>
-            <TaskList tasks={inProgressTask} />
-            <h2>Pending Tasks</h2>
-            <TaskList tasks={pendingTasks} />
+            <h2>Active Tasks</h2>
+            <TaskList tasks={activeTasks} />
             <h2>Completed Tasks</h2>
             <TaskList tasks={completedTasks} />
           </>

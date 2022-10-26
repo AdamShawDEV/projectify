@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import PageNotFound from "./components/modules/PageNotFound";
+import PageNotFound from "./components/common/PageNotFound";
 import ProjectsPage from "./components/projects/ProjectsPage";
-import Header from "./components/Header";
+import Header from "./components/common/Header";
 import ProjectPage from "./components/project/ProjectPage";
 import ManageProjectPage from "./components/project/ManageProjectPage";
 
