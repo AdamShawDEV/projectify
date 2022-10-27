@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./modules/ProjectPage.module.css";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +15,7 @@ import {
 import TaskList from "./TaskList";
 import { taskStatusEnum } from "../../consts";
 import { MdOutlineAdd } from "react-icons/md";
+import AddEditTaskForm from "./AddEditTaskForm";
 
 function ProjectPage() {
   const { projectId } = useParams();
@@ -23,6 +24,7 @@ function ProjectPage() {
   const projectStatus = useSelector(selectProjectStatus);
   const tasks = useSelector((state) => selectTaskByProjectId(state, projectId));
   const taskStatus = useSelector(selectTaskStatus);
+  const [displayAddTaskForm, setDisplayAddTaskForm] = useState(false);
 
   useEffect(() => {
     if (projectStatus === "idle") {
@@ -42,7 +44,7 @@ function ProjectPage() {
   const activeTassks = tasks
     ? tasks.filter((task) => task.status === taskStatusEnum.ACTIVE)
     : [];
-  const completedTassks = tasks
+  const completedTasks = tasks
     ? tasks.filter((task) => task.status === taskStatusEnum.COMPLETED)
     : [];
 
@@ -50,25 +52,47 @@ function ProjectPage() {
     <div className={styles.columnsContainer}>
       <div className={`${styles.column} ${styles.pendingColumn}`}>
         <div className={styles.colomnHeading}>Pending</div>
-        <TaskList tasks={pendingTasks} />
-        <button className={styles.addButton}>
-          <MdOutlineAdd />
-        </button>
+        <div className={styles.listContainer}>
+          <TaskList tasks={pendingTasks} roject={project} />
+          <button
+            className={styles.addButton}
+            onClick={() => setDisplayAddTaskForm(true)}
+          >
+            <MdOutlineAdd />
+          </button>
+        </div>
       </div>
       <div className={`${styles.column} ${styles.activeColumn}`}>
         <div className={styles.colomnHeading}>Active</div>
-        <TaskList tasks={activeTassks} />
-        <button className={styles.addButton}>
-          <MdOutlineAdd />
-        </button>
+        <div className={styles.listContainer}>
+          <TaskList tasks={activeTassks} roject={project} />
+          <button
+            className={styles.addButton}
+            onClick={() => setDisplayAddTaskForm(true)}
+          >
+            <MdOutlineAdd />
+          </button>
+        </div>
       </div>
       <div className={`${styles.column} ${styles.completedColumn}`}>
         <div className={styles.colomnHeading}>Completed</div>
-        <TaskList tasks={completedTassks} />
-        <button className={styles.addButton}>
-          <MdOutlineAdd />
-        </button>
+        <div className={styles.listContainer}>
+          <TaskList tasks={completedTasks} roject={project} />
+          <button
+            className={styles.addButton}
+            onClick={() => setDisplayAddTaskForm(true)}
+          >
+            <MdOutlineAdd />
+          </button>
+        </div>
       </div>
+      {displayAddTaskForm && (
+        <AddEditTaskForm
+          isOpen={displayAddTaskForm}
+          handleClose={() => setDisplayAddTaskForm(false)}
+          projectId={project.id}
+        />
+      )}
     </div>
   );
 }

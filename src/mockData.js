@@ -48,6 +48,56 @@ const tasks = {
       precidents: [],
     },
     {
+      id: "asdad4a5",
+      title: "task 2",
+      details:
+        "This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not",
+      status: "pending",
+      color: "#444",
+      duration: 5,
+      precidents: [],
+    },
+    {
+      id: "asdad4a5",
+      title: "task 2",
+      details:
+        "This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not",
+      status: "pending",
+      color: "#444",
+      duration: 5,
+      precidents: [],
+    },
+    {
+      id: "asdad4a5",
+      title: "task 2",
+      details:
+        "This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not",
+      status: "pending",
+      color: "#444",
+      duration: 5,
+      precidents: [],
+    },
+    {
+      id: "asdad4a5",
+      title: "task 2",
+      details:
+        "This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not",
+      status: "pending",
+      color: "#444",
+      duration: 5,
+      precidents: [],
+    },
+    {
+      id: "asdad4a5",
+      title: "task 2",
+      details:
+        "This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not",
+      status: "pending",
+      color: "#444",
+      duration: 5,
+      precidents: [],
+    },
+    {
       id: "5as4d5a4sd",
       title: "task 3",
       details: "This is the first task",
