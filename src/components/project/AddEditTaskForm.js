@@ -7,12 +7,19 @@ const emptyTask = {
   title: "",
   details: "",
   status: "pending",
+  owner: "",
   color: "#444",
   duration: 5,
   precidents: [],
+  messages: [],
 };
 
-function AddEditTaskForm({ projectId, task = emptyTask, isOpen, handleClose }) {
+function AddEditTaskForm({
+  task = emptyTask,
+  isOpen,
+  handleClose,
+  handleAddSubmit,
+}) {
   const [taskInfo, setTaskInfo] = useState(task);
 
   function handleChange(event) {
@@ -23,6 +30,9 @@ function AddEditTaskForm({ projectId, task = emptyTask, isOpen, handleClose }) {
 
   function handleSubmit(event) {
     event.preventDefault();
+
+    handleAddSubmit(taskInfo);
+    handleClose();
   }
 
   return (

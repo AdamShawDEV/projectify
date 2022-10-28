@@ -7,6 +7,19 @@ const loadTasks = createAsyncThunk("task/loadTasks", async () => {
   return response;
 });
 
+const addTask = createAsyncThunk("task/addTask", async (taskAndProjectId) => {
+  const response = await taskApi.saveTask(taskAndProjectId);
+  return response;
+});
+
+const updateTask = createAsyncThunk(
+  "task/updateTask",
+  async (taskAndProjectId) => {
+    const response = await taskApi.saveTask(taskAndProjectId);
+    return response;
+  }
+);
+
 const taskSlice = createSlice({
   name: "task",
   initialState: initialState.tasks,
@@ -28,6 +41,26 @@ const taskSlice = createSlice({
         ...state,
         status: "failed",
         error: action.error.message,
+      }))
+      .addCase(addTask.fulfilled, (state, action) => ({
+        ...state,
+        data: {
+          ...state.data,
+          [action.payload.projectId]: [
+            ...(state.data[action.payload.projectId] || []),
+            action.payload.task,
+          ],
+        },
+      }))
+      .addCase(updateTask.fulfilled, (state, action) => ({
+        ...state,
+        data: {
+          ...state.data,
+          [action.payload.projectId]: state.data[action.payload.projectId].map(
+            (task) =>
+              task.id === action.payload.task.id ? action.payload.task : task
+          ),
+        },
       }));
   },
 });
@@ -39,4 +72,11 @@ const selectTaskByProjectId = (state, projectId) => state.tasks.data[projectId];
 const selectTaskStatus = (state) => state.tasks.status;
 
 export default taskSlice.reducer;
-export { loadTasks, selectAllTasks, selectTaskByProjectId, selectTaskStatus };
+export {
+  loadTasks,
+  addTask,
+  updateTask,
+  selectAllTasks,
+  selectTaskByProjectId,
+  selectTaskStatus,
+};

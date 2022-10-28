@@ -8,6 +8,7 @@ const backgroundColor = {
 };
 
 function Button({
+  id,
   onClick,
   children,
   style,
@@ -16,6 +17,7 @@ function Button({
 }) {
   return (
     <button
+      id={id}
       className={styles.button}
       onClick={onClick}
       disabled={disabled}

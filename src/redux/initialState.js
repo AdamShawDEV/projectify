@@ -9,6 +9,11 @@ const initialState = {
     status: "idle",
     error: null,
   },
+  messages: {
+    data: {},
+    status: "idle",
+    error: null,
+  },
 };
 
 export default initialState;

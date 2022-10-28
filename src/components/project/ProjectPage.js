@@ -11,6 +11,8 @@ import {
   loadTasks,
   selectTaskByProjectId,
   selectTaskStatus,
+  addTask,
+  updateTask,
 } from "../../redux/slices/taskSlice";
 import TaskList from "./TaskList";
 import { taskStatusEnum } from "../../consts";
@@ -35,6 +37,15 @@ function ProjectPage() {
     }
   }, [projectStatus, taskStatus, dispatch]);
 
+  function handleAddSubmit(task) {
+    console.log(projectId);
+    dispatch(addTask({ task, projectId }));
+  }
+
+  function handleUpdateTask(task) {
+    dispatch(updateTask({ task, projectId }));
+  }
+
   if (projectStatus !== "succeeded" || taskStatus !== "succeeded")
     return "loading...";
 
@@ -48,12 +59,18 @@ function ProjectPage() {
     ? tasks.filter((task) => task.status === taskStatusEnum.COMPLETED)
     : [];
 
+  console.log(project);
+
   return (
     <div className={styles.columnsContainer}>
       <div className={`${styles.column} ${styles.pendingColumn}`}>
         <div className={styles.colomnHeading}>Pending</div>
         <div className={styles.listContainer}>
-          <TaskList tasks={pendingTasks} roject={project} />
+          <TaskList
+            tasks={pendingTasks}
+            project={project}
+            handleUpdateTask={handleUpdateTask}
+          />
           <button
             className={styles.addButton}
             onClick={() => setDisplayAddTaskForm(true)}
@@ -65,7 +82,11 @@ function ProjectPage() {
       <div className={`${styles.column} ${styles.activeColumn}`}>
         <div className={styles.colomnHeading}>Active</div>
         <div className={styles.listContainer}>
-          <TaskList tasks={activeTassks} roject={project} />
+          <TaskList
+            tasks={activeTassks}
+            roject={project}
+            handleUpdateTask={handleUpdateTask}
+          />
           <button
             className={styles.addButton}
             onClick={() => setDisplayAddTaskForm(true)}
@@ -77,7 +98,11 @@ function ProjectPage() {
       <div className={`${styles.column} ${styles.completedColumn}`}>
         <div className={styles.colomnHeading}>Completed</div>
         <div className={styles.listContainer}>
-          <TaskList tasks={completedTasks} roject={project} />
+          <TaskList
+            tasks={completedTasks}
+            roject={project}
+            handleUpdateTask={handleUpdateTask}
+          />
           <button
             className={styles.addButton}
             onClick={() => setDisplayAddTaskForm(true)}
@@ -91,6 +116,7 @@ function ProjectPage() {
           isOpen={displayAddTaskForm}
           handleClose={() => setDisplayAddTaskForm(false)}
           projectId={project.id}
+          handleAddSubmit={handleAddSubmit}
         />
       )}
     </div>

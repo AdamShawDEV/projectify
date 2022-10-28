@@ -1,5 +1,6 @@
 import { delay } from "./apiUtils";
 import { tasks } from "../mockData";
+import { nanoid } from "@reduxjs/toolkit";
 
 async function getTasks() {
   await delay(2000);
@@ -7,4 +8,18 @@ async function getTasks() {
   return Promise.resolve(tasks);
 }
 
-export { getTasks };
+async function saveTask(taskAndProjectId) {
+  // send to server here
+  const revievedTask = taskAndProjectId.task.id
+    ? taskAndProjectId.task
+    : {
+        ...taskAndProjectId.task,
+        id: nanoid(),
+      };
+  return Promise.resolve({
+    task: revievedTask,
+    projectId: taskAndProjectId.projectId,
+  });
+}
+
+export { getTasks, saveTask };
