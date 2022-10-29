@@ -7,6 +7,12 @@
   box-shadow: 0 0.1rem 0 #cacacaff;
 }
 
+.left {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
 .logo {
   color: #cacacaff;
   font-size: 1.5rem;
