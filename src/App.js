@@ -4,6 +4,7 @@ import ProjectsPage from "./components/projects/ProjectsPage";
 import Header from "./components/common/Header";
 import ProjectPage from "./components/project/ProjectPage";
 import ManageProjectPage from "./components/project/ManageProjectPage";
+import PeoplePage from "./components/people/PeoplePage";
 
 function Test() {
   return <h1>This is only a test.</h1>;
@@ -23,6 +24,7 @@ function App() {
             path="/editproject/:projectId"
             element={<ManageProjectPage />}
           />
+          <Route path="/people" element={<PeoplePage />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </main>

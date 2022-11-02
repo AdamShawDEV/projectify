@@ -1,0 +1,33 @@
+.peopleListContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 0.4rem;
+}
+
+.person {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem;
+}
+
+.person:hover {
+  background-color: #f2f2f2ff;
+}
+
+.person h2 {
+  flex-grow: 1;
+  margin: 0;
+}
+
+.image {
+  height: 3rem;
+  width: 3rem;
+  background-color: aqua;
+  border-radius: 50%;
+}
+
+.actionsContainer {
+  display: flex;
+  gap: 0.4rem;
+}

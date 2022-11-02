@@ -14,6 +14,11 @@ const initialState = {
     status: "idle",
     error: null,
   },
+  people: {
+    data: [],
+    status: "idle",
+    error: null,
+  },
 };
 
 export default initialState;

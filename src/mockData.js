@@ -161,4 +161,22 @@ const tasks = {
   ],
 };
 
-export { projects, tasks };
+const people = [
+  {
+    id: "js8f8auc897",
+    firstName: "John",
+    lastName: "Smith",
+  },
+  {
+    id: "0d9s08f09s8g",
+    firstName: "Nick",
+    lastName: "Adams",
+  },
+  {
+    id: "x09c0df9d8",
+    firstName: "Jack",
+    lastName: "Jones",
+  },
+];
+
+export { projects, tasks, people };
