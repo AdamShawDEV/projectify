@@ -7,6 +7,11 @@ const loadPeople = createAsyncThunk("people/loadPeople", async () => {
   return response;
 });
 
+const addPerson = createAsyncThunk("people/addPerson", async (person) => {
+  const response = await peopleApi.savePerson(person);
+  return response;
+});
+
 const peopleSlice = createSlice({
   name: "people",
   initialState: initialState.people,
@@ -26,6 +31,10 @@ const peopleSlice = createSlice({
         ...state,
         status: "failed",
         error: action.error.message,
+      }))
+      .addCase(addPerson.fulfilled, (state, action) => ({
+        ...state,
+        data: [...state.data, action.payload],
       }));
   },
 });

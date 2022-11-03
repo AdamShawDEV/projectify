@@ -6,11 +6,16 @@ import {
   selectPeopleStatus,
 } from "../../redux/slices/peopleSlice";
 import PeopleList from "./PeopleList";
+import Button from "../common/Button";
+import styles from "./modules/PeoplePage.module.css";
+import AddEditPeopleForm from "./AddEditPeopleForm";
+import { useState } from "react";
 
 function PeoplePage() {
   const dispatch = useDispatch();
   const people = useSelector(selectAllPeople);
   const peopleStatus = useSelector(selectPeopleStatus);
+  const [addPersonOpen, setAddPersonOpen] = useState(false);
 
   useEffect(() => {
     if (peopleStatus === "idle") {
@@ -23,7 +28,18 @@ function PeoplePage() {
   return (
     <>
       <h1>People</h1>
-      <PeopleList people={people} />
+      <div className={styles.peopleListContainer}>
+        <PeopleList people={people} />
+        <div className={styles.addButton}>
+          <Button onClick={() => setAddPersonOpen(true)}>add person</Button>
+        </div>
+      </div>
+      {addPersonOpen && (
+        <AddEditPeopleForm
+          isOpen={addPersonOpen}
+          handleClose={() => setAddPersonOpen(false)}
+        />
+      )}
     </>
   );
 }

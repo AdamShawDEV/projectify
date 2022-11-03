@@ -56,7 +56,7 @@ function AddEditTaskForm({
           onChange={(event) => handleChange(event)}
           required
         />
-        <Button>Submit</Button>
+        <Button>submit</Button>
       </form>
     </Modal>
   );

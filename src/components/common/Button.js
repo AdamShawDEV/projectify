@@ -21,7 +21,10 @@ function Button({
       className={styles.button}
       onClick={onClick}
       disabled={disabled}
-      style={{ backgroundColor: backgroundColor[type], ...style }}
+      style={{
+        backgroundColor: backgroundColor[type],
+        ...style,
+      }}
     >
       {children}
     </button>
