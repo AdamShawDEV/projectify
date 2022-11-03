@@ -19,4 +19,10 @@ async function savePerson(person) {
   return Promise.resolve(revievedPerson);
 }
 
-export { getPeople, savePerson };
+async function deletePerson(personId) {
+  // delete derson from server
+
+  return Promise.resolve(personId);
+}
+
+export { getPeople, savePerson, deletePerson };

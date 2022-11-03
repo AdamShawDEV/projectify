@@ -1,7 +1,9 @@
 import Modal from "../common/Modal";
 import Button from "../common/Button";
-import styles from "./modules/AddEditTaskForm.module.css";
 import { useState } from "react";
+import InputText from "../common/InputText";
+import Form from "../common/Form";
+import TextArea from "../common/TextArea";
 
 const emptyTask = {
   title: "",
@@ -18,7 +20,7 @@ function AddEditTaskForm({
   task = emptyTask,
   isOpen,
   handleClose,
-  handleAddSubmit,
+  handleFormSubmit,
 }) {
   const [taskInfo, setTaskInfo] = useState(task);
 
@@ -31,33 +33,30 @@ function AddEditTaskForm({
   function handleSubmit(event) {
     event.preventDefault();
 
-    handleAddSubmit(taskInfo);
+    handleFormSubmit(taskInfo);
     handleClose();
   }
 
   return (
     <Modal isOpen={isOpen} handleClose={handleClose}>
       <h2>{taskInfo.id ? "Edit Task" : "Add Task"}</h2>
-      <form className={styles.addTaskForm} onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <label htmlFor="title">Tasks Title:</label>
-        <input
+        <InputText
           id="title"
-          type="text"
           placeholder="enter title"
           value={taskInfo.title}
           onChange={(event) => handleChange(event)}
-          required
         />
         <label htmlFor="details">Details:</label>
-        <textarea
+        <TextArea
           id="details"
           placeholder="enter details"
           value={taskInfo.details}
           onChange={(event) => handleChange(event)}
-          required
         />
         <Button>submit</Button>
-      </form>
+      </Form>
     </Modal>
   );
 }

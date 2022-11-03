@@ -2,6 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
   loadPeople,
+  addPerson,
+  updatePerson,
+  deletePerson,
   selectAllPeople,
   selectPeopleStatus,
 } from "../../redux/slices/peopleSlice";
@@ -23,13 +26,25 @@ function PeoplePage() {
     }
   });
 
+  function handleFormSubmit(person) {
+    person.id ? dispatch(updatePerson(person)) : dispatch(addPerson(person));
+  }
+
+  function deletePersonById(personId) {
+    dispatch(deletePerson(personId));
+  }
+
   if (peopleStatus !== "succeeded") return "loading...";
 
   return (
     <>
-      <h1>People</h1>
       <div className={styles.peopleListContainer}>
-        <PeopleList people={people} />
+        <h1>People</h1>
+        <PeopleList
+          people={people}
+          handleFormSubmit={handleFormSubmit}
+          deletePersonById={deletePersonById}
+        />
         <div className={styles.addButton}>
           <Button onClick={() => setAddPersonOpen(true)}>add person</Button>
         </div>
@@ -38,6 +53,7 @@ function PeoplePage() {
         <AddEditPeopleForm
           isOpen={addPersonOpen}
           handleClose={() => setAddPersonOpen(false)}
+          handleFormSubmit={handleFormSubmit}
         />
       )}
     </>

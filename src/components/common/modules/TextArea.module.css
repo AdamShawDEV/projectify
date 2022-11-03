@@ -1,0 +1,26 @@
+.textArea {
+  resize: none;
+  height: 10rem;
+}
+
+.textArea {
+  margin-bottom: 0.4rem;
+  background-color: #fff;
+  outline: none;
+  border: solid 2px #c5c5c5ff;
+  padding: 0.4rem 0.4rem;
+  border-radius: 0.4rem;
+}
+
+.textArea::placeholder {
+  color: #5f5f5dff;
+}
+
+.textArea:hover {
+  border-color: #6a6a6aff;
+}
+
+.textArea:focus {
+  outline: none;
+  border-color: #2d2afbff;
+}

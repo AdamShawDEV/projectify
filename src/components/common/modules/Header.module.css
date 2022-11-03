@@ -4,7 +4,7 @@
   justify-content: space-between;
   background-color: #f2f2f2ff;
   padding: 0.4rem;
-  box-shadow: 0 0.1rem 0 #cacacaff;
+  box-shadow: 0 0.2rem 0.4rem rgb(120, 120, 120);
 }
 
 .left {

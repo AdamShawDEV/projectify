@@ -1,13 +1,20 @@
 import Modal from "../common/Modal";
 import Button from "../common/Button";
 import { useState } from "react";
+import InputText from "../common/InputText";
+import Form from "../common/Form";
 
 const empryPerson = {
   firstName: "",
   lastName: "",
 };
 
-function AddEditPeopleForm({ person = empryPerson, isOpen, handleClose }) {
+function AddEditPeopleForm({
+  person = empryPerson,
+  isOpen,
+  handleClose,
+  handleFormSubmit,
+}) {
   const [personInfo, setPersonInfo] = useState(person);
 
   function handleChange(event) {
@@ -19,33 +26,30 @@ function AddEditPeopleForm({ person = empryPerson, isOpen, handleClose }) {
   function handleSubmit(event) {
     event.preventDefault();
 
+    handleFormSubmit(personInfo);
     handleClose();
   }
 
   return (
     <Modal isOpen={isOpen} handleClose={handleClose}>
       <h2>{person.id ? "Edit Person" : "Add Person"}</h2>
-      <form onSubmit={(event) => handleSubmit(event)}>
+      <Form onSubmit={(event) => handleSubmit(event)}>
         <label htmlFor="firstName">First Name:</label>
-        <input
-          type="text"
+        <InputText
           id="firstName"
           placeholder="enter first name"
           value={personInfo.firstName}
           onChange={(event) => handleChange(event)}
-          required
         />
         <label htmlFor="lastName">First Name:</label>
-        <input
-          type="text"
+        <InputText
           id="lastName"
           placeholder="enter last name"
           value={personInfo.lastName}
           onChange={(event) => handleChange(event)}
-          required
         />
         <Button>submit</Button>
-      </form>
+      </Form>
     </Modal>
   );
 }

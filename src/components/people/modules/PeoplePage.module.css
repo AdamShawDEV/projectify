@@ -1,6 +1,8 @@
 .peopleListContainer {
   overflow: auto;
   padding-bottom: 0.4rem;
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
 .addButton {

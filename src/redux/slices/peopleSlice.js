@@ -12,6 +12,19 @@ const addPerson = createAsyncThunk("people/addPerson", async (person) => {
   return response;
 });
 
+const updatePerson = createAsyncThunk("people/updatePerson", async (person) => {
+  const response = await peopleApi.savePerson(person);
+  return response;
+});
+
+const deletePerson = createAsyncThunk(
+  "people.deletePerson",
+  async (personId) => {
+    const response = await peopleApi.deletePerson(personId);
+    return response;
+  }
+);
+
 const peopleSlice = createSlice({
   name: "people",
   initialState: initialState.people,
@@ -35,7 +48,21 @@ const peopleSlice = createSlice({
       .addCase(addPerson.fulfilled, (state, action) => ({
         ...state,
         data: [...state.data, action.payload],
-      }));
+      }))
+      .addCase(updatePerson.fulfilled, (state, action) => {
+        return {
+          ...state,
+          data: state.data.map((person) =>
+            person.id === action.payload.id ? action.payload : person
+          ),
+        };
+      })
+      .addCase(deletePerson.fulfilled, (state, action) => {
+        return {
+          ...state,
+          data: state.data.filter((person) => person.id !== action.payload),
+        };
+      });
   },
 });
 
@@ -44,4 +71,11 @@ const selectAllPeople = (state) => state.people.data;
 const selectPeopleStatus = (state) => state.people.status;
 
 export default peopleSlice.reducer;
-export { selectAllPeople, selectPeopleStatus, loadPeople };
+export {
+  selectAllPeople,
+  selectPeopleStatus,
+  loadPeople,
+  addPerson,
+  updatePerson,
+  deletePerson,
+};

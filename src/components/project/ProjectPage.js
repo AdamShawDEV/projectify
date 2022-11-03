@@ -37,8 +37,7 @@ function ProjectPage() {
     }
   }, [projectStatus, taskStatus, dispatch]);
 
-  function handleAddSubmit(task) {
-    console.log(projectId);
+  function handleFormSubmit(task) {
     dispatch(addTask({ task, projectId }));
   }
 
@@ -58,8 +57,6 @@ function ProjectPage() {
   const completedTasks = tasks
     ? tasks.filter((task) => task.status === taskStatusEnum.COMPLETED)
     : [];
-
-  console.log(project);
 
   return (
     <div className={styles.columnsContainer}>
@@ -116,7 +113,7 @@ function ProjectPage() {
           isOpen={displayAddTaskForm}
           handleClose={() => setDisplayAddTaskForm(false)}
           projectId={project.id}
-          handleAddSubmit={handleAddSubmit}
+          handleFormSubmit={handleFormSubmit}
         />
       )}
     </div>

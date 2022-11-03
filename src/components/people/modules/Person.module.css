@@ -3,6 +3,7 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.4rem;
+  background-color: #fff;
 }
 
 .person:hover {
@@ -24,4 +25,9 @@
 .actionsContainer {
   display: flex;
   gap: 0.4rem;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: space-around;
 }
