@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./modules/Header.module.css";
 import NavMenu from "./NavMenu";
+import UserControl from "./UserControl";
 
 function Header() {
   return (
@@ -9,7 +10,7 @@ function Header() {
         <NavMenu />
         <span className={styles.logo}>Projectify</span>
       </div>
-      <div className={styles.about}></div>
+      <UserControl />
     </header>
   );
 }

@@ -6,14 +6,17 @@ import reportWebVitals from "./reportWebVitals";
 import store from "./redux/configureStore";
 import { Provider as ReduxProvider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
+import UserContextProvider from "./components/common/useUserContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ReduxProvider store={store}>
-      <Router>
-        <App />
-      </Router>
+      <UserContextProvider>
+        <Router>
+          <App />
+        </Router>
+      </UserContextProvider>
     </ReduxProvider>
   </React.StrictMode>
 );

@@ -24,7 +24,7 @@ function PeoplePage() {
     if (peopleStatus === "idle") {
       dispatch(loadPeople());
     }
-  });
+  }, [peopleStatus, dispatch]);
 
   function handleFormSubmit(person) {
     person.id ? dispatch(updatePerson(person)) : dispatch(addPerson(person));
