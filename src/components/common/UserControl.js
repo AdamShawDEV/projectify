@@ -7,6 +7,8 @@ import {
   selectPeopleStatus,
 } from "../../redux/slices/peopleSlice";
 import { useUser } from "./useUserContext";
+import Menu from "./Menu";
+import MenuItem from "./MenuItem";
 
 function UserControl() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -36,25 +38,28 @@ function UserControl() {
         {currentUser ? (
           <>
             <span>{`${currentUser.firstName} ${currentUser.lastName}`}</span>
-            <img src="/images/noimage.png" />
+            <img src="/images/noimage.png" alt="user" />
           </>
         ) : (
           "Login"
         )}
       </div>
       {menuOpen && (
-        <div className={styles.menu} onClick={() => setMenuOpen(false)}>
+        <Menu closeMenu={() => setMenuOpen(false)}>
           {users.map((user) => (
-            <div
-              key={user.id}
-              className={styles.menuItem}
-              onClick={() => changeUser(user.id)}
-            >
-              <img src={`${user.image ? user.image : "/images/noimage.png"}`} />
+            <MenuItem key={user.id} onClick={() => changeUser(user.id)}>
+              <img
+                className={styles.userImage}
+                src={`${user.image ? user.image : "/images/noimage.png"}`}
+                alt="user"
+              />
               <span>{`${user.firstName} ${user.lastName}`}</span>
-            </div>
+            </MenuItem>
           ))}
-        </div>
+          <MenuItem onClick={() => changeUser(null)}>
+            <span>logout</span>
+          </MenuItem>
+        </Menu>
       )}
     </div>
   );

@@ -1,7 +1,7 @@
 import styles from "./modules/TaskList.module.css";
 import Task from "./Task";
 
-function TaskList({ tasks, project, handleUpdateTask }) {
+function TaskList({ tasks, project, handleUpdateTask, people }) {
   return (
     <>
       <div className={styles.taskContainer}>
@@ -11,6 +11,7 @@ function TaskList({ tasks, project, handleUpdateTask }) {
             task={task}
             project={project}
             handleUpdateTask={handleUpdateTask}
+            people={people}
           />
         ))}
       </div>

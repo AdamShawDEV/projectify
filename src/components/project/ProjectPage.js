@@ -14,6 +14,11 @@ import {
   addTask,
   updateTask,
 } from "../../redux/slices/taskSlice";
+import {
+  loadPeople,
+  selectAllPeople,
+  selectPeopleStatus,
+} from "../../redux/slices/peopleSlice";
 import TaskList from "./TaskList";
 import { taskStatusEnum } from "../../consts";
 import { MdOutlineAdd } from "react-icons/md";
@@ -26,6 +31,8 @@ function ProjectPage() {
   const projectStatus = useSelector(selectProjectStatus);
   const tasks = useSelector((state) => selectTaskByProjectId(state, projectId));
   const taskStatus = useSelector(selectTaskStatus);
+  const people = useSelector(selectAllPeople);
+  const peopleStatus = useSelector(selectPeopleStatus);
   const [displayAddTaskForm, setDisplayAddTaskForm] = useState(false);
 
   useEffect(() => {
@@ -35,7 +42,10 @@ function ProjectPage() {
     if (taskStatus === "idle") {
       dispatch(loadTasks());
     }
-  }, [projectStatus, taskStatus, dispatch]);
+    if (peopleStatus === "idle") {
+      dispatch(loadPeople());
+    }
+  }, [projectStatus, taskStatus, peopleStatus, dispatch]);
 
   function handleFormSubmit(task) {
     dispatch(addTask({ task, projectId }));
@@ -67,6 +77,7 @@ function ProjectPage() {
             tasks={pendingTasks}
             project={project}
             handleUpdateTask={handleUpdateTask}
+            people={people}
           />
           <button
             className={styles.addButton}
@@ -83,6 +94,7 @@ function ProjectPage() {
             tasks={activeTassks}
             roject={project}
             handleUpdateTask={handleUpdateTask}
+            people={people}
           />
           <button
             className={styles.addButton}
@@ -99,6 +111,7 @@ function ProjectPage() {
             tasks={completedTasks}
             roject={project}
             handleUpdateTask={handleUpdateTask}
+            people={people}
           />
           <button
             className={styles.addButton}

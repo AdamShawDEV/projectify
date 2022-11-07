@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./modules/NavMenu.module.css";
 import { AiOutlineMenuUnfold, AiOutlineMenuFold } from "react-icons/ai";
+import Menu from "./Menu";
 
 const activeStyle = {
   backgroundColor: "#25a35aff",
@@ -19,8 +20,8 @@ function NavMenu() {
         {menuOpen ? <AiOutlineMenuFold /> : <AiOutlineMenuUnfold />}
       </div>
       {menuOpen && (
-        <div className={styles.menu} onClick={() => setMenuOpen(false)}>
-          <ul>
+        <Menu closeMenu={() => setMenuOpen(false)} side="left">
+          <ul className={styles.navMenu}>
             <li>
               <NavLink
                 to="/projects"
@@ -46,7 +47,7 @@ function NavMenu() {
               </NavLink>
             </li>
           </ul>
-        </div>
+        </Menu>
       )}
     </div>
   );

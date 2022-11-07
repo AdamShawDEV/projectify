@@ -19,3 +19,7 @@
   outline: none;
   border-color: #2d2afbff;
 }
+
+.inputTextField:disabled {
+  background-color: rgb(176, 176, 176);
+}

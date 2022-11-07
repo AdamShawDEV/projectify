@@ -1,0 +1,23 @@
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.8rem;
+  text-decoration: none;
+  font-weight: 700;
+  color: #fff;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+
+.menuItem:hover {
+  background-color: #6ddb9cff;
+}
+
+.menuItem span {
+  display: inline-block;
+  width: max-content;
+  font-weight: 700;
+  user-select: none;
+}

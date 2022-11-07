@@ -1,6 +1,6 @@
 import styles from "./modules/InputText.module.css";
 
-function InputText({ id, placeholder, value, onChange }) {
+function InputText({ id, placeholder, value, onChange, disabled }) {
   return (
     <input
       className={styles.inputTextField}
@@ -9,6 +9,7 @@ function InputText({ id, placeholder, value, onChange }) {
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      disabled={disabled}
       required
     />
   );

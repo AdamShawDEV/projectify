@@ -1,0 +1,8 @@
+.menu {
+  position: absolute;
+  background-color: #2fcc71ff;
+  overflow: hidden;
+  border-radius: 0.4rem;
+  z-index: 100;
+  box-shadow: 0.2rem 0.2rem 0.4rem rgb(120, 120, 120);
+}
