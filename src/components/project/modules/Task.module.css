@@ -1,9 +1,24 @@
 .task {
+  cursor: pointer;
   position: relative;
   background-color: #fff;
   border-radius: 0.8rem;
   padding: 0.8rem;
   text-align: left;
+}
+
+.optionsMenu {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.2rem 0.4rem 0 0.4rem;
+  font-size: 1.5rem;
+  border-radius: 0.4rem;
+}
+
+.optionsMenu:hover {
+  background-color: #979797ff;
 }
 
 .heading {
@@ -38,34 +53,4 @@
 .buttonBox {
   display: flex;
   justify-content: space-around;
-}
-
-.messageContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.message {
-  position: relative;
-  width: max-content;
-  max-width: 80%;
-  background-color: #fff;
-  border-radius: 0.8rem;
-  padding: 0.8rem;
-  text-align: left;
-  margin-top: 1rem;
-}
-
-.message img {
-  position: absolute;
-  top: -1rem;
-  left: 0.2rem;
-  width: 2rem;
-  border-radius: 50%;
-}
-
-.senderName {
-  color: #cacacaff;
-  font-size: 0.6rem;
 }

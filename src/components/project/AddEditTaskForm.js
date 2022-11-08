@@ -16,12 +16,7 @@ const emptyTask = {
   messages: [],
 };
 
-function AddEditTaskForm({
-  task = emptyTask,
-  isOpen,
-  handleClose,
-  handleFormSubmit,
-}) {
+function AddEditTaskForm({ task = emptyTask, handleClose, handleFormSubmit }) {
   const [taskInfo, setTaskInfo] = useState(task);
 
   function handleChange(event) {
@@ -38,7 +33,7 @@ function AddEditTaskForm({
   }
 
   return (
-    <Modal isOpen={isOpen} handleClose={handleClose}>
+    <Modal handleClose={handleClose}>
       <h2>{taskInfo.id ? "Edit Task" : "Add Task"}</h2>
       <Form onSubmit={handleSubmit}>
         <label htmlFor="title">Tasks Title:</label>

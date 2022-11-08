@@ -1,43 +1,33 @@
 import { useState } from "react";
-import { nanoid } from "@reduxjs/toolkit";
 import styles from "./modules/Task.module.css";
-import Button from "../common/Button";
 import { BiMessageSquareDetail } from "react-icons/bi";
-import Modal from "../common/Modal";
-import InputText from "../common/InputText";
-import { useUser } from "../common/useUserContext";
+import AddEditTaskForm from "./AddEditTaskForm";
+import TaskModal from "./TaskModal";
 
-function Task({ task, project, handleUpdateTask, people }) {
-  const [displayNoteModal, setDisplayNoteModal] = useState(false);
-  const [messageInput, setMessageInput] = useState("");
-  const { userId } = useUser();
+const OPEN_MODAL = {
+  NONE: "none",
+  NOTE_MODAL: "note modal",
+  EDIT_MODAL: "edit modal",
+};
 
-  function handleStatusButton(event) {
-    const { id } = event.target;
+function Task({ task, handleUpdateTask, people }) {
+  const [openModal, setOpenModal] = useState(OPEN_MODAL.NONE);
 
-    handleUpdateTask({
-      ...task,
-      status: id,
-    });
+  function enterEditMode() {
+    setOpenModal(OPEN_MODAL.EDIT_MODAL);
   }
 
-  function handleSendButton() {
-    if (messageInput) {
-      handleUpdateTask({
-        ...task,
-        messages: [
-          ...task.messages,
-          { id: nanoid(), content: messageInput, user: userId },
-        ],
-      });
-      setMessageInput("");
-    }
+  function handleEditFormSubmit(updatedTaskInfo) {
+    handleUpdateTask({
+      ...task,
+      ...updatedTaskInfo,
+    });
   }
 
   const taskCard = (
     <div
       className={styles.task}
-      onClick={() => setDisplayNoteModal((current) => !current)}
+      onClick={() => setOpenModal(OPEN_MODAL.NOTE_MODAL)}
     >
       <div className={styles.heading}>
         <h2>{task.title}</h2>
@@ -59,94 +49,22 @@ function Task({ task, project, handleUpdateTask, people }) {
   return (
     <>
       {taskCard}
-      {displayNoteModal && (
-        <Modal
-          isOpen={displayNoteModal}
-          handleClose={() => setDisplayNoteModal(false)}
-        >
-          <h3>Set Status:</h3>
-          <div className={styles.buttonBox}>
-            <Button
-              id="pending"
-              onClick={(event) => handleStatusButton(event)}
-              style={{ backgroundColor: "#e84c3dff" }}
-            >
-              pending
-            </Button>
-            <Button
-              id="active"
-              onClick={(event) => handleStatusButton(event)}
-              style={{ backgroundColor: "#fddd0eff" }}
-            >
-              active
-            </Button>
-            <Button
-              id="completed"
-              onClick={(event) => handleStatusButton(event)}
-              style={{ backgroundColor: "#2fcc71ff" }}
-            >
-              completed
-            </Button>
-          </div>
-          {taskCard}
-          <div className={styles.messageContainer}>
-            {task.messages.map((message) => {
-              const sender = people.find(
-                (person) => person.id === message.user
-              );
-
-              return (
-                <div
-                  key={message.id}
-                  className={styles.message}
-                  style={
-                    userId === message.user
-                      ? {
-                          alignSelf: "flex-end",
-                          backgroundColor: "#4b4bf9ff",
-                          color: "#fff",
-                        }
-                      : null
-                  }
-                >
-                  <img
-                    src={`${
-                      sender.image ? sender.image : "/images/noimage.png"
-                    }`}
-                    alt="user"
-                    style={
-                      userId === message.user
-                        ? { left: "auto", right: "0.2rem" }
-                        : null
-                    }
-                  />
-                  {message.content}
-                  <div
-                    className={styles.senderName}
-                    style={
-                      userId === message.user ? { textAlign: "right" } : null
-                    }
-                  >
-                    {sender.firstName}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          <div>
-            <InputText
-              value={messageInput}
-              onChange={(event) => setMessageInput(event.target.value)}
-              disabled={!userId}
-            />
-            <Button
-              onClick={handleSendButton}
-              disabled={messageInput === "" || !userId}
-            >
-              send
-            </Button>
-          </div>
-        </Modal>
+      {openModal === OPEN_MODAL.NOTE_MODAL && (
+        <TaskModal
+          handleClose={() => setOpenModal(OPEN_MODAL.NONE)}
+          handleUpdateTask={handleUpdateTask}
+          enterEditMode={enterEditMode}
+          task={task}
+          taskCard={taskCard}
+          people={people}
+        />
+      )}
+      {openModal === OPEN_MODAL.EDIT_MODAL && (
+        <AddEditTaskForm
+          task={task}
+          handleClose={() => setOpenModal(OPEN_MODAL.NOTE_MODAL)}
+          handleFormSubmit={handleEditFormSubmit}
+        />
       )}
     </>
   );

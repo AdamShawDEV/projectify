@@ -55,26 +55,13 @@ function ProjectPage() {
     dispatch(updateTask({ task, projectId }));
   }
 
-  if (projectStatus !== "succeeded" || taskStatus !== "succeeded")
-    return "loading...";
-
-  const pendingTasks = tasks
-    ? tasks.filter((task) => task.status === taskStatusEnum.PENDING)
-    : [];
-  const activeTassks = tasks
-    ? tasks.filter((task) => task.status === taskStatusEnum.ACTIVE)
-    : [];
-  const completedTasks = tasks
-    ? tasks.filter((task) => task.status === taskStatusEnum.COMPLETED)
-    : [];
-
-  return (
-    <div className={styles.columnsContainer}>
-      <div className={`${styles.column} ${styles.pendingColumn}`}>
-        <div className={styles.colomnHeading}>Pending</div>
+  function renderList(heading, list, style) {
+    return (
+      <div className={`${styles.column} ${style}`}>
+        <div className={styles.colomnHeading}>{heading}</div>
         <div className={styles.listContainer}>
           <TaskList
-            tasks={pendingTasks}
+            tasks={list}
             project={project}
             handleUpdateTask={handleUpdateTask}
             people={people}
@@ -87,43 +74,29 @@ function ProjectPage() {
           </button>
         </div>
       </div>
-      <div className={`${styles.column} ${styles.activeColumn}`}>
-        <div className={styles.colomnHeading}>Active</div>
-        <div className={styles.listContainer}>
-          <TaskList
-            tasks={activeTassks}
-            roject={project}
-            handleUpdateTask={handleUpdateTask}
-            people={people}
-          />
-          <button
-            className={styles.addButton}
-            onClick={() => setDisplayAddTaskForm(true)}
-          >
-            <MdOutlineAdd />
-          </button>
-        </div>
-      </div>
-      <div className={`${styles.column} ${styles.completedColumn}`}>
-        <div className={styles.colomnHeading}>Completed</div>
-        <div className={styles.listContainer}>
-          <TaskList
-            tasks={completedTasks}
-            roject={project}
-            handleUpdateTask={handleUpdateTask}
-            people={people}
-          />
-          <button
-            className={styles.addButton}
-            onClick={() => setDisplayAddTaskForm(true)}
-          >
-            <MdOutlineAdd />
-          </button>
-        </div>
-      </div>
+    );
+  }
+
+  if (projectStatus !== "succeeded" || taskStatus !== "succeeded")
+    return "loading...";
+
+  const pendingTasks = tasks
+    ? tasks.filter((task) => task.status === taskStatusEnum.PENDING)
+    : [];
+  const activeTasks = tasks
+    ? tasks.filter((task) => task.status === taskStatusEnum.ACTIVE)
+    : [];
+  const completedTasks = tasks
+    ? tasks.filter((task) => task.status === taskStatusEnum.COMPLETED)
+    : [];
+
+  return (
+    <div className={styles.columnsContainer}>
+      {renderList("Pending", pendingTasks, styles.pendingColumn)}
+      {renderList("Active", activeTasks, styles.activeColumn)}
+      {renderList("Completed", completedTasks, styles.completedColumn)}
       {displayAddTaskForm && (
         <AddEditTaskForm
-          isOpen={displayAddTaskForm}
           handleClose={() => setDisplayAddTaskForm(false)}
           projectId={project.id}
           handleFormSubmit={handleFormSubmit}
