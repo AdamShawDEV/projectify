@@ -1,4 +1,5 @@
 import styles from "./modules/MessageList.module.css";
+import { noUserImageUri } from "../../consts";
 
 function MessageList({ messages, people, userId }) {
   return (
@@ -21,7 +22,7 @@ function MessageList({ messages, people, userId }) {
             }
           >
             <img
-              src={`${sender.image ? sender.image : "/images/noimage.png"}`}
+              src={`${sender.image ? sender.image : noUserImageUri}`}
               alt="user"
               style={
                 userId === message.user

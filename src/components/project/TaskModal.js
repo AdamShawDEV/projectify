@@ -1,5 +1,5 @@
 import styles from "./modules/TaskModal.module.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Modal from "../common/Modal";
 import { HiDotsHorizontal } from "react-icons/hi";
 import Button from "../common/Button";
@@ -9,6 +9,8 @@ import MenuItem from "../common/MenuItem";
 import MessageList from "./MessageList";
 import { useUser } from "../common/useUserContext";
 import { nanoid } from "@reduxjs/toolkit";
+import { TASK_STATUS } from "../../consts";
+import { useNavigate } from "react-router-dom";
 
 function TaskModal({
   isOpen,
@@ -20,15 +22,38 @@ function TaskModal({
   people,
 }) {
   const [displayOptionsMenu, setDisplayOptionsMenu] = useState(false);
+  const [displayOwnerSelect, setDisplayOwnerSelect] = useState(false);
   const [messageInput, setMessageInput] = useState("");
   const { userId } = useUser();
+  const statusSelectedRef = useRef(null);
+  const navigate = useNavigate();
 
   function handleStatusButton(event) {
     const { id } = event.target;
 
+    if (
+      (id === TASK_STATUS.ACTIVE || id === TASK_STATUS.COMPLETED) &&
+      !task.owner
+    ) {
+      setDisplayOwnerSelect(true);
+      statusSelectedRef.current = id;
+    } else {
+      handleUpdateTask({
+        ...task,
+        status: id,
+      });
+    }
+  }
+
+  function handleOwnerSelected(e) {
+    const { value: selectedOwner } = e.target;
+
+    if (selectedOwner === "add new") navigate("/people");
+
     handleUpdateTask({
       ...task,
-      status: id,
+      status: statusSelectedRef.current,
+      owner: selectedOwner,
     });
   }
 
@@ -73,27 +98,42 @@ function TaskModal({
       <h3>Set Status:</h3>
       <div className={styles.buttonBox}>
         <Button
-          id="pending"
+          id={TASK_STATUS.PENDING}
           onClick={(event) => handleStatusButton(event)}
           style={{ backgroundColor: "#e84c3dff" }}
         >
           pending
         </Button>
         <Button
-          id="active"
+          id={TASK_STATUS.ACTIVE}
           onClick={(event) => handleStatusButton(event)}
           style={{ backgroundColor: "#fddd0eff" }}
         >
           active
         </Button>
         <Button
-          id="completed"
+          id={TASK_STATUS.COMPLETED}
           onClick={(event) => handleStatusButton(event)}
           style={{ backgroundColor: "#2fcc71ff" }}
         >
           completed
         </Button>
       </div>
+      {displayOwnerSelect && (
+        <>
+          <h3>please select owner</h3>
+          <select onChange={(e) => handleOwnerSelected(e)}>
+            <option value="">select owner</option>
+            {people.map((person) => (
+              <option
+                key={person.id}
+                value={person.id}
+              >{`${person.firstName} ${person.lastName}`}</option>
+            ))}
+            <option value="add new">add new</option>
+          </select>
+        </>
+      )}
       {taskCard}
       <MessageList messages={task.messages} people={people} userId={userId} />
       <div>

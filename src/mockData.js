@@ -33,7 +33,7 @@ const tasks = {
       details:
         "This is the first task This is the first task This is the first task",
       status: "completed",
-      owner: "",
+      owner: "js8f8auc897",
       color: "#f00",
       duration: 5,
       precidents: [],

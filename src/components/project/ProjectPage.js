@@ -20,7 +20,7 @@ import {
   selectPeopleStatus,
 } from "../../redux/slices/peopleSlice";
 import TaskList from "./TaskList";
-import { taskStatusEnum } from "../../consts";
+import { TASK_STATUS } from "../../consts";
 import { MdOutlineAdd } from "react-icons/md";
 import AddEditTaskForm from "./AddEditTaskForm";
 
@@ -81,13 +81,13 @@ function ProjectPage() {
     return "loading...";
 
   const pendingTasks = tasks
-    ? tasks.filter((task) => task.status === taskStatusEnum.PENDING)
+    ? tasks.filter((task) => task.status === TASK_STATUS.PENDING)
     : [];
   const activeTasks = tasks
-    ? tasks.filter((task) => task.status === taskStatusEnum.ACTIVE)
+    ? tasks.filter((task) => task.status === TASK_STATUS.ACTIVE)
     : [];
   const completedTasks = tasks
-    ? tasks.filter((task) => task.status === taskStatusEnum.COMPLETED)
+    ? tasks.filter((task) => task.status === TASK_STATUS.COMPLETED)
     : [];
 
   return (

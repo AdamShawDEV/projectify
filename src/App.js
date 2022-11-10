@@ -6,17 +6,13 @@ import ProjectPage from "./components/project/ProjectPage";
 import ManageProjectPage from "./components/project/ManageProjectPage";
 import PeoplePage from "./components/people/PeoplePage";
 
-function Test() {
-  return <h1>This is only a test.</h1>;
-}
-
 function App() {
   return (
     <>
       <Header />
       <main>
         <Routes>
-          <Route path="/" element={<Test />} />
+          <Route path="/" element={<ProjectsPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/project/:projectId" element={<ProjectPage />} />
           <Route path="/addproject" element={<ManageProjectPage />} />

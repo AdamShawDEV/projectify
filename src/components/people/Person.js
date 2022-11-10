@@ -3,6 +3,7 @@ import Button from "../common/Button";
 import { useState } from "react";
 import AddEditPeopleForm from "./AddEditPeopleForm";
 import Modal from "../common/Modal";
+import { noUserImageUri } from "../../consts";
 
 function Person({ person, handleFormSubmit, deletePerson }) {
   const [editPersonOpen, setEditPersonOpen] = useState(false);
@@ -10,7 +11,11 @@ function Person({ person, handleFormSubmit, deletePerson }) {
 
   return (
     <div className={styles.person}>
-      <div className={styles.image}></div>
+      <img
+        className={styles.image}
+        src={`${person.image ? person.image : noUserImageUri}`}
+        alt="user"
+      />
       <h2>{`${person.firstName} ${person.lastName}`}</h2>
       <div className={styles.actionsContainer}>
         <Button onClick={() => setEditPersonOpen(true)}>edit</Button>

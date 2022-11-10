@@ -1,6 +1,8 @@
-export const taskStatusEnum = {
+export const TASK_STATUS = {
   PENDING: "pending",
   ACTIVE: "active",
   COMPLETED: "completed",
-  CONCELED: "canceled",
+  CANCELED: "Canceled",
 };
+
+export const noUserImageUri = "/images/noimage.png";

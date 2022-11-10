@@ -3,6 +3,7 @@ import styles from "./modules/Task.module.css";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import AddEditTaskForm from "./AddEditTaskForm";
 import TaskModal from "./TaskModal";
+import { noUserImageUri } from "../../consts";
 
 const OPEN_MODAL = {
   NONE: "none",
@@ -24,6 +25,10 @@ function Task({ task, handleUpdateTask, people }) {
     });
   }
 
+  const owner = task.owner
+    ? people.find((person) => task.owner === person.id)
+    : null;
+
   const taskCard = (
     <div
       className={styles.task}
@@ -32,7 +37,13 @@ function Task({ task, handleUpdateTask, people }) {
       <div className={styles.heading}>
         <h2>{task.title}</h2>
         <div className={styles.peopleContainer}>
-          {task.owner && <div className={styles.portrait}></div>}
+          {owner && (
+            <img
+              className={styles.portrait}
+              src={owner.image ? owner.image : noUserImageUri}
+              alt="owner"
+            />
+          )}
         </div>
       </div>
       <p>{task.details}</p>
