@@ -55,6 +55,8 @@ function TaskModal({
       status: statusSelectedRef.current,
       owner: selectedOwner,
     });
+
+    handleClose();
   }
 
   function handleSendButton() {
