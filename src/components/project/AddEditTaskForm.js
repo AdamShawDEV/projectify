@@ -4,6 +4,7 @@ import { useState } from "react";
 import InputText from "../common/InputText";
 import Form from "../common/Form";
 import TextArea from "../common/TextArea";
+import PropTypes from "prop-types";
 
 const emptyTask = {
   title: "",
@@ -55,5 +56,11 @@ function AddEditTaskForm({ task = emptyTask, handleClose, handleFormSubmit }) {
     </Modal>
   );
 }
+
+AddEditTaskForm.propTypes = {
+  task: PropTypes.object,
+  handleClose: PropTypes.func.isRequired,
+  handleFormSubmit: PropTypes.func.isRequired,
+};
 
 export default AddEditTaskForm;

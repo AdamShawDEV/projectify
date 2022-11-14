@@ -4,6 +4,7 @@ import { BiMessageSquareDetail } from "react-icons/bi";
 import AddEditTaskForm from "./AddEditTaskForm";
 import TaskModal from "./TaskModal";
 import { noUserImageUri } from "../../consts";
+import PropTypes from "prop-types";
 
 const OPEN_MODAL = {
   NONE: "none",
@@ -80,5 +81,11 @@ function Task({ task, handleUpdateTask, people }) {
     </>
   );
 }
+
+Task.propTypes = {
+  task: PropTypes.object.isRequired,
+  handleUpdateTask: PropTypes.func.isRequired,
+  people: PropTypes.array.isRequired,
+};
 
 export default Task;

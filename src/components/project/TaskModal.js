@@ -11,9 +11,9 @@ import { useUser } from "../common/useUserContext";
 import { nanoid } from "@reduxjs/toolkit";
 import { TASK_STATUS } from "../../consts";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 function TaskModal({
-  isOpen,
   handleClose,
   handleUpdateTask,
   enterEditMode,
@@ -74,7 +74,6 @@ function TaskModal({
 
   return (
     <Modal
-      isOpen={isOpen}
       handleClose={() => {
         handleClose();
         setDisplayOptionsMenu(false);
@@ -154,5 +153,14 @@ function TaskModal({
     </Modal>
   );
 }
+
+TaskModal.propTypes = {
+  handleClose: PropTypes.func.isRequired,
+  handleUpdateTask: PropTypes.func.isRequired,
+  enterEditMode: PropTypes.func.isRequired,
+  task: PropTypes.object.isRequired,
+  taskCard: PropTypes.object.isRequired,
+  people: PropTypes.array.isRequired,
+};
 
 export default TaskModal;

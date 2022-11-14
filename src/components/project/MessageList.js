@@ -1,5 +1,6 @@
 import styles from "./modules/MessageList.module.css";
 import { noUserImageUri } from "../../consts";
+import PropTypes from "prop-types";
 
 function MessageList({ messages, people, userId }) {
   return (
@@ -43,5 +44,11 @@ function MessageList({ messages, people, userId }) {
     </div>
   );
 }
+
+MessageList.propTypes = {
+  messages: PropTypes.array.isRequired,
+  people: PropTypes.array.isRequired,
+  userId: PropTypes.string,
+};
 
 export default MessageList;

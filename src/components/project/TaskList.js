@@ -1,7 +1,8 @@
 import styles from "./modules/TaskList.module.css";
 import Task from "./Task";
+import PropTypes from "prop-types";
 
-function TaskList({ tasks, project, handleUpdateTask, people }) {
+function TaskList({ tasks, handleUpdateTask, people }) {
   return (
     <>
       <div className={styles.taskContainer}>
@@ -9,7 +10,6 @@ function TaskList({ tasks, project, handleUpdateTask, people }) {
           <Task
             key={task.id}
             task={task}
-            project={project}
             handleUpdateTask={handleUpdateTask}
             people={people}
           />
@@ -18,5 +18,11 @@ function TaskList({ tasks, project, handleUpdateTask, people }) {
     </>
   );
 }
+
+TaskList.propTypes = {
+  tasks: PropTypes.array.isRequired,
+  handleUpdateTask: PropTypes.func.isRequired,
+  people: PropTypes.array.isRequired,
+};
 
 export default TaskList;
