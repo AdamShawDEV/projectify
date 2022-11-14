@@ -1,4 +1,5 @@
 import styles from "./modules/TextArea.module.css";
+import PropTypes from "prop-types";
 
 function TextArea({ id, placeholder, value, onChange }) {
   return (
@@ -12,5 +13,12 @@ function TextArea({ id, placeholder, value, onChange }) {
     />
   );
 }
+
+TextArea.propTypes = {
+  id: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default TextArea;

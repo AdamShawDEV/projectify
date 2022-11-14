@@ -84,13 +84,8 @@ function TaskModal({
           <HiDotsHorizontal />
         </div>
         {displayOptionsMenu && (
-          <Menu side="left">
-            <MenuItem
-              onClick={() => {
-                enterEditMode();
-                setDisplayOptionsMenu(false);
-              }}
-            >
+          <Menu side="left" closeMenu={() => setDisplayOptionsMenu(false)}>
+            <MenuItem onClick={() => enterEditMode()}>
               <span>edit</span>
             </MenuItem>
           </Menu>

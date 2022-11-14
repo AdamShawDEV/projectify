@@ -1,5 +1,6 @@
 import styles from "./modules/Project.module.css";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 function Project({ project, tasks }) {
   const navigate = useNavigate();
@@ -42,5 +43,10 @@ function Project({ project, tasks }) {
     </div>
   );
 }
+
+Project.propTypes = {
+  project: PropTypes.object.isRequired,
+  tasks: PropTypes.array,
+};
 
 export default Project;

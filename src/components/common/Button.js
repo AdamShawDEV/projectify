@@ -1,4 +1,5 @@
 import styles from "./modules/Button.module.css";
+import PropTypes from "prop-types";
 
 const backgroundColor = {
   normal: "#4b4bf9ff",
@@ -30,5 +31,14 @@ function Button({
     </button>
   );
 }
+
+Button.propTypes = {
+  id: PropTypes.string,
+  onClick: PropTypes.func,
+  children: PropTypes.node.isRequired,
+  style: PropTypes.object,
+  disabled: PropTypes.bool,
+  type: PropTypes.string,
+};
 
 export default Button;

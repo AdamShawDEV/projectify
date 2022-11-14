@@ -1,4 +1,5 @@
 import styles from "./modules/Menu.module.css";
+import PropTypes from "prop-types";
 
 function Menu({ closeMenu, side = "right", children }) {
   return (
@@ -11,5 +12,11 @@ function Menu({ closeMenu, side = "right", children }) {
     </div>
   );
 }
+
+Menu.propTypes = {
+  closeMenu: PropTypes.func.isRequired,
+  side: PropTypes.string,
+  children: PropTypes.node.isRequired,
+};
 
 export default Menu;

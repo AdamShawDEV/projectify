@@ -1,5 +1,6 @@
 import styles from "./modules/ProjectList.module.css";
 import Project from "./Project";
+import PropTypes from "prop-types";
 
 function ProjectList({ projects, tasks }) {
   return (
@@ -10,5 +11,10 @@ function ProjectList({ projects, tasks }) {
     </div>
   );
 }
+
+ProjectList.propTypes = {
+  projects: PropTypes.array.isRequired,
+  tasks: PropTypes.object.isRequired,
+};
 
 export default ProjectList;

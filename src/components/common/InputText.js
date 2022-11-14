@@ -1,4 +1,5 @@
 import styles from "./modules/InputText.module.css";
+import PropTypes from "prop-types";
 
 function InputText({ id, placeholder, value, onChange, disabled }) {
   return (
@@ -14,5 +15,13 @@ function InputText({ id, placeholder, value, onChange, disabled }) {
     />
   );
 }
+
+InputText.propTypes = {
+  id: PropTypes.string,
+  placeholder: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
+};
 
 export default InputText;

@@ -1,4 +1,5 @@
 import styles from "./modules/Form.module.css";
+import PropTypes from "prop-types";
 
 function Form({ children, onSubmit }) {
   return (
@@ -7,5 +8,10 @@ function Form({ children, onSubmit }) {
     </form>
   );
 }
+
+Form.propTypes = {
+  children: PropTypes.node.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default Form;
