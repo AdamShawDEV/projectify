@@ -37,6 +37,12 @@ function TaskModal({
     ) {
       setDisplayOwnerSelect(true);
       statusSelectedRef.current = id;
+    } else if (id === TASK_STATUS.PENDING) {
+      handleUpdateTask({
+        ...task,
+        status: id,
+        owner: null,
+      });
     } else {
       handleUpdateTask({
         ...task,

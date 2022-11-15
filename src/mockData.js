@@ -76,7 +76,7 @@ const tasks = {
       details:
         "This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not",
       status: "pending",
-      owner: "",
+      owner: null,
       color: "#444",
       duration: 5,
       precidents: [],
@@ -88,7 +88,7 @@ const tasks = {
       details:
         "This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not",
       status: "pending",
-      owner: "",
+      owner: null,
       color: "#444",
       duration: 5,
       precidents: [],
@@ -100,7 +100,7 @@ const tasks = {
       details:
         "This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not",
       status: "pending",
-      owner: "",
+      owner: null,
       color: "#444",
       duration: 5,
       precidents: [],
@@ -112,7 +112,7 @@ const tasks = {
       details:
         "This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not",
       status: "pending",
-      owner: "",
+      owner: null,
       color: "#444",
       duration: 5,
       precidents: [],
@@ -124,7 +124,7 @@ const tasks = {
       details:
         "This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not",
       status: "pending",
-      owner: "",
+      owner: null,
       color: "#444",
       duration: 5,
       precidents: [],
@@ -136,7 +136,7 @@ const tasks = {
       details:
         "This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not",
       status: "pending",
-      owner: "",
+      owner: null,
       color: "#444",
       duration: 5,
       precidents: [],
@@ -147,7 +147,7 @@ const tasks = {
       title: "task 3",
       details: "This is the first task",
       status: "active",
-      owner: "",
+      owner: null,
       color: "#a54",
       duration: 5,
       precidents: [],
@@ -158,7 +158,7 @@ const tasks = {
       title: "task 3",
       details: "This is the first task but it will be by ar the longest",
       status: "active",
-      owner: "",
+      owner: null,
       color: "#a54",
       duration: 5,
       precidents: [],

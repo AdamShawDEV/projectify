@@ -44,6 +44,10 @@
   border-radius: 50%;
 }
 
+.addButton:hover {
+  background-color: rgb(235, 235, 235);
+}
+
 .listContainer {
   overflow: auto;
   padding-bottom: 0.4rem;
