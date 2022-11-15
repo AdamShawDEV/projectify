@@ -8,18 +8,15 @@ async function getTasks() {
   return Promise.resolve(tasks);
 }
 
-async function saveTask(taskAndProjectId) {
+async function saveTask(task) {
   // send to server here
-  const revievedTask = taskAndProjectId.task.id
-    ? taskAndProjectId.task
+  const revievedTask = task.id
+    ? task
     : {
-        ...taskAndProjectId.task,
+        ...task,
         id: nanoid(),
       };
-  return Promise.resolve({
-    task: revievedTask,
-    projectId: taskAndProjectId.projectId,
-  });
+  return Promise.resolve(revievedTask);
 }
 
 export { getTasks, saveTask };

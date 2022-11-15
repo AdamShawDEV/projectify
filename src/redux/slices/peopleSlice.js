@@ -70,10 +70,14 @@ const selectAllPeople = (state) => state.people.data;
 
 const selectPeopleStatus = (state) => state.people.status;
 
+const selectPersonById = (state, personId) =>
+  state.people.data.find((person) => person.id === personId);
+
 export default peopleSlice.reducer;
 export {
   selectAllPeople,
   selectPeopleStatus,
+  selectPersonById,
   loadPeople,
   addPerson,
   updatePerson,

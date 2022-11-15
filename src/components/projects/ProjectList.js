@@ -6,7 +6,11 @@ function ProjectList({ projects, tasks }) {
   return (
     <div className={styles.listContainer}>
       {projects.map((project) => (
-        <Project key={project.id} project={project} tasks={tasks[project.id]} />
+        <Project
+          key={project.id}
+          project={project}
+          tasks={tasks.filter((task) => task.projectId === project.id)}
+        />
       ))}
     </div>
   );
@@ -14,7 +18,7 @@ function ProjectList({ projects, tasks }) {
 
 ProjectList.propTypes = {
   projects: PropTypes.array.isRequired,
-  tasks: PropTypes.object.isRequired,
+  tasks: PropTypes.array.isRequired,
 };
 
 export default ProjectList;

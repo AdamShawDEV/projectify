@@ -48,11 +48,11 @@ function ProjectPage() {
   }, [projectStatus, taskStatus, peopleStatus, dispatch]);
 
   function handleFormSubmit(task) {
-    dispatch(addTask({ task, projectId }));
+    dispatch(addTask({ ...task, projectId }));
   }
 
   function handleUpdateTask(task) {
-    dispatch(updateTask({ task, projectId }));
+    dispatch(updateTask({ ...task }));
   }
 
   function renderList(heading, list, style) {
@@ -77,7 +77,11 @@ function ProjectPage() {
     );
   }
 
-  if (projectStatus !== "succeeded" || taskStatus !== "succeeded")
+  if (
+    projectStatus !== "succeeded" ||
+    taskStatus !== "succeeded" ||
+    peopleStatus !== "succeeded"
+  )
     return "loading...";
 
   const pendingTasks = tasks

@@ -5,7 +5,7 @@ const initialState = {
     error: null,
   },
   tasks: {
-    data: {},
+    data: [],
     status: "idle",
     error: null,
   },

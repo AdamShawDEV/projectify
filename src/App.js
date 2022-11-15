@@ -5,6 +5,7 @@ import Header from "./components/common/Header";
 import ProjectPage from "./components/project/ProjectPage";
 import ManageProjectPage from "./components/project/ManageProjectPage";
 import PeoplePage from "./components/people/PeoplePage";
+import PersonDetailsPage from "./components/people/PersonDetailsPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             element={<ManageProjectPage />}
           />
           <Route path="/people" element={<PeoplePage />} />
+          <Route path="/person/:personId" element={<PersonDetailsPage />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </main>

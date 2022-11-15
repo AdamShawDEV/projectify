@@ -7,8 +7,8 @@ const loadTasks = createAsyncThunk("task/loadTasks", async () => {
   return response;
 });
 
-const addTask = createAsyncThunk("task/addTask", async (taskAndProjectId) => {
-  const response = await taskApi.saveTask(taskAndProjectId);
+const addTask = createAsyncThunk("task/addTask", async (task) => {
+  const response = await taskApi.saveTask(task);
   return response;
 });
 
@@ -44,32 +44,26 @@ const taskSlice = createSlice({
       }))
       .addCase(addTask.fulfilled, (state, action) => ({
         ...state,
-        data: {
-          ...state.data,
-          [action.payload.projectId]: [
-            ...(state.data[action.payload.projectId] || []),
-            action.payload.task,
-          ],
-        },
+        data: [...state.data, action.payload],
       }))
       .addCase(updateTask.fulfilled, (state, action) => ({
         ...state,
-        data: {
-          ...state.data,
-          [action.payload.projectId]: state.data[action.payload.projectId].map(
-            (task) =>
-              task.id === action.payload.task.id ? action.payload.task : task
-          ),
-        },
+        data: state.data.map((task) =>
+          task.id === action.payload.id ? action.payload : task
+        ),
       }));
   },
 });
 
 const selectAllTasks = (state) => state.tasks.data;
 
-const selectTaskByProjectId = (state, projectId) => state.tasks.data[projectId];
+const selectTaskByProjectId = (state, projectId) =>
+  state.tasks.data.filter((task) => task.projectId === projectId);
 
 const selectTaskStatus = (state) => state.tasks.status;
+
+const selectTasksByPersonId = (state, personId) =>
+  state.tasks.data.filter((task) => task.owner === personId);
 
 export default taskSlice.reducer;
 export {
@@ -78,5 +72,6 @@ export {
   updateTask,
   selectAllTasks,
   selectTaskByProjectId,
+  selectTasksByPersonId,
   selectTaskStatus,
 };
