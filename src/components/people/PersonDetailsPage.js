@@ -18,8 +18,6 @@ import { useEffect, useState } from "react";
 import TaskList from "../project/TaskList";
 import Button from "../common/Button";
 import AddEditPeopleForm from "./AddEditPeopleForm";
-import Modal from "../common/Modal";
-import { useNavigate } from "react-router-dom";
 
 function PersonDetailsPage() {
   const { personId } = useParams();
@@ -53,8 +51,12 @@ function PersonDetailsPage() {
     <div className={styles.columnsContainer}>
       <div className={styles.detailsColumn}>
         <img src="/images/noimage.png" alt="person name" />
-        <h1>{`${person.firstName} ${person.lastName}`}</h1>
-        <Button onClick={() => setEditPersonOpen(true)}>edit</Button>
+        <span>
+          <h1>
+            {`${person.firstName} ${person.lastName}`}&nbsp;
+            <Button onClick={() => setEditPersonOpen(true)}>edit</Button>
+          </h1>
+        </span>
       </div>
       <div className={styles.activeTasksColumn}>
         <h2>Owned Tasks</h2>
