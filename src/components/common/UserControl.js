@@ -47,19 +47,22 @@ function UserControl() {
       </div>
       {menuOpen && (
         <Menu closeMenu={() => setMenuOpen(false)}>
-          {users.map((user) => (
-            <MenuItem key={user.id} onClick={() => changeUser(user.id)}>
-              <img
-                className={styles.userImage}
-                src={`${user.image ? user.image : noUserImageUri}`}
-                alt="user"
-              />
-              <span>{`${user.firstName} ${user.lastName}`}</span>
+          {!currentUserId ? (
+            users.map((user) => (
+              <MenuItem key={user.id} onClick={() => changeUser(user.id)}>
+                <img
+                  className={styles.userImage}
+                  src={`${user.image ? user.image : noUserImageUri}`}
+                  alt="user"
+                />
+                <span>{`${user.firstName} ${user.lastName}`}</span>
+              </MenuItem>
+            ))
+          ) : (
+            <MenuItem onClick={() => changeUser(null)}>
+              <span>logout</span>
             </MenuItem>
-          ))}
-          <MenuItem onClick={() => changeUser(null)}>
-            <span>logout</span>
-          </MenuItem>
+          )}
         </Menu>
       )}
     </div>

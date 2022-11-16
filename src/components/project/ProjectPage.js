@@ -62,7 +62,6 @@ function ProjectPage() {
         <div className={styles.listContainer}>
           <TaskList
             tasks={list}
-            project={project}
             handleUpdateTask={handleUpdateTask}
             people={people}
           />
@@ -102,7 +101,6 @@ function ProjectPage() {
       {displayAddTaskForm && (
         <AddEditTaskForm
           handleClose={() => setDisplayAddTaskForm(false)}
-          projectId={project.id}
           handleFormSubmit={handleFormSubmit}
         />
       )}

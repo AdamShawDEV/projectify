@@ -1,8 +1,11 @@
 import styles from "./modules/MessageList.module.css";
 import { noUserImageUri } from "../../consts";
 import PropTypes from "prop-types";
+import { useUser } from "../common/useUserContext";
 
-function MessageList({ messages, people, userId }) {
+function MessageList({ messages, people }) {
+  const { userId } = useUser();
+
   return (
     <div className={styles.messageContainer}>
       {messages.map((message) => {
@@ -48,7 +51,6 @@ function MessageList({ messages, people, userId }) {
 MessageList.propTypes = {
   messages: PropTypes.array.isRequired,
   people: PropTypes.array.isRequired,
-  userId: PropTypes.string,
 };
 
 export default MessageList;

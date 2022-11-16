@@ -137,7 +137,7 @@ function TaskModal({
         </>
       )}
       {taskCard}
-      <MessageList messages={task.messages} people={people} userId={userId} />
+      <MessageList messages={task.messages} people={people} />
       <div>
         <InputText
           value={messageInput}
