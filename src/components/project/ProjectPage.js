@@ -14,11 +14,7 @@ import {
   addTask,
   updateTask,
 } from "../../redux/slices/taskSlice";
-import {
-  loadPeople,
-  selectAllPeople,
-  selectPeopleStatus,
-} from "../../redux/slices/peopleSlice";
+import { loadPeople, selectPeopleStatus } from "../../redux/slices/peopleSlice";
 import TaskList from "./TaskList";
 import { TASK_STATUS } from "../../consts";
 import { MdOutlineAdd } from "react-icons/md";
@@ -27,11 +23,10 @@ import AddEditTaskForm from "./AddEditTaskForm";
 function ProjectPage() {
   const { projectId } = useParams();
   const dispatch = useDispatch();
-  const project = useSelector((state) => selectProjectById(state, projectId));
   const projectStatus = useSelector(selectProjectStatus);
   const tasks = useSelector((state) => selectTaskByProjectId(state, projectId));
   const taskStatus = useSelector(selectTaskStatus);
-  const people = useSelector(selectAllPeople);
+  // const people = useSelector(selectAllPeople);
   const peopleStatus = useSelector(selectPeopleStatus);
   const [displayAddTaskForm, setDisplayAddTaskForm] = useState(false);
 
@@ -47,24 +42,12 @@ function ProjectPage() {
     }
   }, [projectStatus, taskStatus, peopleStatus, dispatch]);
 
-  function handleFormSubmit(task) {
-    dispatch(addTask({ ...task, projectId }));
-  }
-
-  function handleUpdateTask(task) {
-    dispatch(updateTask({ ...task }));
-  }
-
   function renderList(heading, list, style) {
     return (
       <div className={`${styles.column} ${style}`}>
         <div className={styles.colomnHeading}>{heading}</div>
         <div className={styles.listContainer}>
-          <TaskList
-            tasks={list}
-            handleUpdateTask={handleUpdateTask}
-            people={people}
-          />
+          <TaskList tasks={list} />
           <button
             className={styles.addButton}
             onClick={() => setDisplayAddTaskForm(true)}
@@ -101,7 +84,7 @@ function ProjectPage() {
       {displayAddTaskForm && (
         <AddEditTaskForm
           handleClose={() => setDisplayAddTaskForm(false)}
-          handleFormSubmit={handleFormSubmit}
+          projectId={projectId}
         />
       )}
     </div>

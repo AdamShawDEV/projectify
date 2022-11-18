@@ -5,6 +5,8 @@ import AddEditTaskForm from "./AddEditTaskForm";
 import TaskModal from "./TaskModal";
 import { noUserImageUri } from "../../consts";
 import PropTypes from "prop-types";
+import { selectAllPeople } from "../../redux/slices/peopleSlice";
+import { useSelector } from "react-redux";
 
 const OPEN_MODAL = {
   NONE: "none",
@@ -12,18 +14,12 @@ const OPEN_MODAL = {
   EDIT_MODAL: "edit modal",
 };
 
-function Task({ task, handleUpdateTask, people }) {
+function Task({ task }) {
   const [openModal, setOpenModal] = useState(OPEN_MODAL.NONE);
+  const people = useSelector(selectAllPeople);
 
   function enterEditMode() {
     setOpenModal(OPEN_MODAL.EDIT_MODAL);
-  }
-
-  function handleEditFormSubmit(updatedTaskInfo) {
-    handleUpdateTask({
-      ...task,
-      ...updatedTaskInfo,
-    });
   }
 
   const owner = task.owner
@@ -64,7 +60,6 @@ function Task({ task, handleUpdateTask, people }) {
       {openModal === OPEN_MODAL.NOTE_MODAL && (
         <TaskModal
           handleClose={() => setOpenModal(OPEN_MODAL.NONE)}
-          handleUpdateTask={handleUpdateTask}
           enterEditMode={enterEditMode}
           task={task}
           taskCard={taskCard}
@@ -75,7 +70,6 @@ function Task({ task, handleUpdateTask, people }) {
         <AddEditTaskForm
           task={task}
           handleClose={() => setOpenModal(OPEN_MODAL.NOTE_MODAL)}
-          handleFormSubmit={handleEditFormSubmit}
         />
       )}
     </>
@@ -84,8 +78,6 @@ function Task({ task, handleUpdateTask, people }) {
 
 Task.propTypes = {
   task: PropTypes.object.isRequired,
-  handleUpdateTask: PropTypes.func.isRequired,
-  people: PropTypes.array.isRequired,
 };
 
 export default Task;

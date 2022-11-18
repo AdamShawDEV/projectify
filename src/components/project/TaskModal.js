@@ -12,21 +12,17 @@ import { nanoid } from "@reduxjs/toolkit";
 import { TASK_STATUS } from "../../consts";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { updateTask } from "../../redux/slices/taskSlice";
 
-function TaskModal({
-  handleClose,
-  handleUpdateTask,
-  enterEditMode,
-  task,
-  taskCard,
-  people,
-}) {
+function TaskModal({ handleClose, enterEditMode, task, taskCard, people }) {
   const [displayOptionsMenu, setDisplayOptionsMenu] = useState(false);
   const [displayOwnerSelect, setDisplayOwnerSelect] = useState(false);
   const [messageInput, setMessageInput] = useState("");
   const { userId } = useUser();
   const statusSelectedRef = useRef(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   function handleStatusButton(event) {
     const { id } = event.target;
@@ -38,16 +34,20 @@ function TaskModal({
       setDisplayOwnerSelect(true);
       statusSelectedRef.current = id;
     } else if (id === TASK_STATUS.PENDING) {
-      handleUpdateTask({
-        ...task,
-        status: id,
-        owner: null,
-      });
+      dispatch(
+        updateTask({
+          ...task,
+          status: id,
+          owner: null,
+        })
+      );
     } else {
-      handleUpdateTask({
-        ...task,
-        status: id,
-      });
+      dispatch(
+        updateTask({
+          ...task,
+          status: id,
+        })
+      );
     }
   }
 
@@ -56,24 +56,28 @@ function TaskModal({
 
     if (selectedOwner === "add new") navigate("/people");
 
-    handleUpdateTask({
-      ...task,
-      status: statusSelectedRef.current,
-      owner: selectedOwner,
-    });
+    dispatch(
+      updateTask({
+        ...task,
+        status: statusSelectedRef.current,
+        owner: selectedOwner,
+      })
+    );
 
     handleClose();
   }
 
   function handleSendButton() {
     if (messageInput) {
-      handleUpdateTask({
-        ...task,
-        messages: [
-          ...task.messages,
-          { id: nanoid(), content: messageInput, user: userId },
-        ],
-      });
+      dispatch(
+        updateTask({
+          ...task,
+          messages: [
+            ...task.messages,
+            { id: nanoid(), content: messageInput, user: userId },
+          ],
+        })
+      );
       setMessageInput("");
     }
   }
@@ -157,7 +161,6 @@ function TaskModal({
 
 TaskModal.propTypes = {
   handleClose: PropTypes.func.isRequired,
-  handleUpdateTask: PropTypes.func.isRequired,
   enterEditMode: PropTypes.func.isRequired,
   task: PropTypes.object.isRequired,
   taskCard: PropTypes.object.isRequired,

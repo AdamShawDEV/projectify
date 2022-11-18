@@ -5,6 +5,8 @@ import InputText from "../common/InputText";
 import Form from "../common/Form";
 import TextArea from "../common/TextArea";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { addTask, updateTask } from "../../redux/slices/taskSlice";
 
 const emptyTask = {
   title: "",
@@ -17,8 +19,9 @@ const emptyTask = {
   messages: [],
 };
 
-function AddEditTaskForm({ task = emptyTask, handleClose, handleFormSubmit }) {
+function AddEditTaskForm({ task = emptyTask, handleClose, projectId }) {
   const [taskInfo, setTaskInfo] = useState(task);
+  const dispatch = useDispatch();
 
   function handleChange(event) {
     const { id, value } = event.target;
@@ -29,7 +32,10 @@ function AddEditTaskForm({ task = emptyTask, handleClose, handleFormSubmit }) {
   function handleSubmit(event) {
     event.preventDefault();
 
-    handleFormSubmit(taskInfo);
+    task.id
+      ? dispatch(updateTask(taskInfo))
+      : dispatch(addTask({ ...taskInfo, projectId }));
+
     handleClose();
   }
 
@@ -60,7 +66,7 @@ function AddEditTaskForm({ task = emptyTask, handleClose, handleFormSubmit }) {
 AddEditTaskForm.propTypes = {
   task: PropTypes.object,
   handleClose: PropTypes.func.isRequired,
-  handleFormSubmit: PropTypes.func.isRequired,
+  projectId: PropTypes.string,
 };
 
 export default AddEditTaskForm;
