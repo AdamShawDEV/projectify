@@ -4,15 +4,12 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loadProjects,
-  selectProjectById,
   selectProjectStatus,
 } from "../../redux/slices/projectSlice";
 import {
   loadTasks,
   selectTaskByProjectId,
   selectTaskStatus,
-  addTask,
-  updateTask,
 } from "../../redux/slices/taskSlice";
 import { loadPeople, selectPeopleStatus } from "../../redux/slices/peopleSlice";
 import TaskList from "./TaskList";
@@ -26,7 +23,6 @@ function ProjectPage() {
   const projectStatus = useSelector(selectProjectStatus);
   const tasks = useSelector((state) => selectTaskByProjectId(state, projectId));
   const taskStatus = useSelector(selectTaskStatus);
-  // const people = useSelector(selectAllPeople);
   const peopleStatus = useSelector(selectPeopleStatus);
   const [displayAddTaskForm, setDisplayAddTaskForm] = useState(false);
 

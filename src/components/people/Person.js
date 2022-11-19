@@ -1,6 +1,7 @@
 import styles from "./modules/Person.module.css";
 import { noUserImageUri } from "../../consts";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 function Person({ person }) {
   const navigate = useNavigate();
@@ -19,5 +20,9 @@ function Person({ person }) {
     </div>
   );
 }
+
+Person.propTypes = {
+  person: PropTypes.object.isRequired,
+};
 
 export default Person;

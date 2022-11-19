@@ -1,7 +1,8 @@
 import styles from "./modules/PeopleList.module.css";
 import Person from "./Person";
+import PropTypes from "prop-types";
 
-function PeopleList({ people, handleFormSubmit, deletePersonById }) {
+function PeopleList({ people }) {
   return (
     <div className={styles.peopleListContainer}>
       {people.map((person) => (
@@ -10,5 +11,9 @@ function PeopleList({ people, handleFormSubmit, deletePersonById }) {
     </div>
   );
 }
+
+PeopleList.propTypes = {
+  people: PropTypes.array.isRequired,
+};
 
 export default PeopleList;

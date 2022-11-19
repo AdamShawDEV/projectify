@@ -1,8 +1,13 @@
 import styles from "./modules/Project.module.css";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+import { selectTaskByProjectId } from "../../redux/slices/taskSlice";
 
-function Project({ project, tasks }) {
+function Project({ project }) {
+  const tasks = useSelector((state) =>
+    selectTaskByProjectId(state, project.id)
+  );
   const navigate = useNavigate();
 
   const activeTasks = tasks

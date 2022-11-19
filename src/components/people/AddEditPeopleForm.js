@@ -3,18 +3,17 @@ import Button from "../common/Button";
 import { useState } from "react";
 import InputText from "../common/InputText";
 import Form from "../common/Form";
+import { useDispatch } from "react-redux";
+import { addPerson, updatePerson } from "../../redux/slices/peopleSlice";
+import PropTypes from "prop-types";
 
 const empryPerson = {
   firstName: "",
   lastName: "",
 };
 
-function AddEditPeopleForm({
-  person = empryPerson,
-  isOpen,
-  handleClose,
-  handleFormSubmit,
-}) {
+function AddEditPeopleForm({ person = empryPerson, handleClose }) {
+  const dispatch = useDispatch();
   const [personInfo, setPersonInfo] = useState(person);
 
   function handleChange(event) {
@@ -26,12 +25,15 @@ function AddEditPeopleForm({
   function handleSubmit(event) {
     event.preventDefault();
 
-    handleFormSubmit(personInfo);
+    person.id
+      ? dispatch(updatePerson(personInfo))
+      : dispatch(addPerson(personInfo));
+
     handleClose();
   }
 
   return (
-    <Modal isOpen={isOpen} handleClose={handleClose}>
+    <Modal handleClose={handleClose}>
       <h2>{person.id ? "Edit Person" : "Add Person"}</h2>
       <Form onSubmit={(event) => handleSubmit(event)}>
         <label htmlFor="firstName">First Name:</label>
@@ -53,5 +55,10 @@ function AddEditPeopleForm({
     </Modal>
   );
 }
+
+AddEditPeopleForm.propTypes = {
+  person: PropTypes.object,
+  handleClose: PropTypes.func.isRequired,
+};
 
 export default AddEditPeopleForm;

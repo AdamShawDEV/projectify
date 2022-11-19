@@ -26,10 +26,6 @@ function PeoplePage() {
     }
   }, [peopleStatus, dispatch]);
 
-  function handleFormSubmit(person) {
-    person.id ? dispatch(updatePerson(person)) : dispatch(addPerson(person));
-  }
-
   function deletePersonById(personId) {
     dispatch(deletePerson(personId));
   }
@@ -40,11 +36,7 @@ function PeoplePage() {
     <>
       <div className={styles.peopleListContainer}>
         <h1>People</h1>
-        <PeopleList
-          people={people}
-          handleFormSubmit={handleFormSubmit}
-          deletePersonById={deletePersonById}
-        />
+        <PeopleList people={people} deletePersonById={deletePersonById} />
         <div className={styles.addButton}>
           <Button onClick={() => setAddPersonOpen(true)}>add person</Button>
         </div>
@@ -53,7 +45,6 @@ function PeoplePage() {
         <AddEditPeopleForm
           isOpen={addPersonOpen}
           handleClose={() => setAddPersonOpen(false)}
-          handleFormSubmit={handleFormSubmit}
         />
       )}
     </>

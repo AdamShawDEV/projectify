@@ -5,18 +5,13 @@ import {
   selectAllProjects,
   selectProjectStatus,
 } from "../../redux/slices/projectSlice";
-import {
-  loadTasks,
-  selectAllTasks,
-  selectTaskStatus,
-} from "../../redux/slices/taskSlice";
+import { loadTasks, selectTaskStatus } from "../../redux/slices/taskSlice";
 import ProjectList from "./ProjectList";
 
 function ProjectsPage() {
   const dispatch = useDispatch();
   const projects = useSelector(selectAllProjects);
   const projectStatus = useSelector(selectProjectStatus);
-  const tasks = useSelector(selectAllTasks);
   const taskStatus = useSelector(selectTaskStatus);
 
   useEffect(() => {
@@ -27,17 +22,15 @@ function ProjectsPage() {
     if (taskStatus === "idle") {
       dispatch(loadTasks());
     }
+  }, [projectStatus, taskStatus, dispatch]);
 
-    // eslint-disable-next-line
-  }, []);
-
-  if (projectStatus === "loading" || taskStatus === "loading")
+  if (projectStatus !== "succeeded" || taskStatus !== "succeeded")
     return "loading...";
 
   return (
     <>
       <h1>Projects</h1>
-      <ProjectList projects={projects} tasks={tasks} />
+      <ProjectList projects={projects} />
     </>
   );
 }

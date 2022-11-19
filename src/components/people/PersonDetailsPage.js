@@ -4,14 +4,11 @@ import {
   selectPersonById,
   selectPeopleStatus,
   loadPeople,
-  updatePerson,
-  selectAllPeople,
 } from "../../redux/slices/peopleSlice";
 import {
   loadTasks,
   selectTasksByPersonId,
   selectTaskStatus,
-  updateTask,
 } from "../../redux/slices/taskSlice";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -22,7 +19,6 @@ import AddEditPeopleForm from "./AddEditPeopleForm";
 function PersonDetailsPage() {
   const { personId } = useParams();
   const person = useSelector((state) => selectPersonById(state, personId));
-  const people = useSelector(selectAllPeople);
   const peopleStatus = useSelector(selectPeopleStatus);
   const ownedTasks = useSelector((state) =>
     selectTasksByPersonId(state, personId)
@@ -35,14 +31,6 @@ function PersonDetailsPage() {
     if (peopleStatus === "idle") dispatch(loadPeople());
     if (taskStatus === "idle") dispatch(loadTasks());
   }, [peopleStatus, taskStatus, dispatch]);
-
-  function handleUpdateTask(task) {
-    dispatch(updateTask({ ...task }));
-  }
-
-  function handleFormSubmit(updatedPerson) {
-    dispatch(updatePerson(updatedPerson));
-  }
 
   if (peopleStatus !== "succeeded" || taskStatus !== "succeeded")
     return "loading...";
@@ -60,18 +48,12 @@ function PersonDetailsPage() {
       </div>
       <div className={styles.activeTasksColumn}>
         <h2>Owned Tasks</h2>
-        <TaskList
-          tasks={ownedTasks}
-          handleUpdateTask={handleUpdateTask}
-          people={people}
-        />
+        <TaskList tasks={ownedTasks} />
       </div>
       {editPersonOpen && (
         <AddEditPeopleForm
-          isOpen={editPersonOpen}
           handleClose={() => setEditPersonOpen(false)}
           person={person}
-          handleFormSubmit={handleFormSubmit}
         />
       )}
     </div>
