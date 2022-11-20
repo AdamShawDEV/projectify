@@ -10,6 +10,11 @@ import {
   selectTasksByPersonId,
   selectTaskStatus,
 } from "../../redux/slices/taskSlice";
+import {
+  loadProjects,
+  selectAllProjects,
+  selectProjectStatus,
+} from "../../redux/slices/projectSlice";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import TaskList from "../project/TaskList";
@@ -24,16 +29,25 @@ function PersonDetailsPage() {
     selectTasksByPersonId(state, personId)
   );
   const taskStatus = useSelector(selectTaskStatus);
+  const projects = useSelector(selectAllProjects);
+  const projectsStatus = useSelector(selectProjectStatus);
   const dispatch = useDispatch();
   const [editPersonOpen, setEditPersonOpen] = useState(false);
 
   useEffect(() => {
     if (peopleStatus === "idle") dispatch(loadPeople());
     if (taskStatus === "idle") dispatch(loadTasks());
-  }, [peopleStatus, taskStatus, dispatch]);
+    if (projectsStatus === "idle") dispatch(loadProjects());
+  }, [peopleStatus, taskStatus, projectsStatus, dispatch]);
 
-  if (peopleStatus !== "succeeded" || taskStatus !== "succeeded")
+  if (
+    peopleStatus !== "succeeded" ||
+    taskStatus !== "succeeded" ||
+    projectsStatus !== "succeeded"
+  )
     return "loading...";
+
+  const sortedTasks = sortTasksByProjet(projects, ownedTasks);
 
   return (
     <div className={styles.columnsContainer}>
@@ -48,7 +62,12 @@ function PersonDetailsPage() {
       </div>
       <div className={styles.activeTasksColumn}>
         <h2>Owned Tasks</h2>
-        <TaskList tasks={ownedTasks} />
+        {Object.keys(sortedTasks).map((projectName) => (
+          <div key={projectName}>
+            <h3>{projectName}</h3>
+            <TaskList tasks={sortedTasks[projectName]} />
+          </div>
+        ))}
       </div>
       {editPersonOpen && (
         <AddEditPeopleForm
@@ -58,6 +77,18 @@ function PersonDetailsPage() {
       )}
     </div>
   );
+}
+
+function sortTasksByProjet(projects, tasks) {
+  let output = {};
+
+  projects.forEach((project) => {
+    let projectTasks = tasks.filter((task) => task.projectId === project.id);
+    if (projectTasks.length > 0)
+      output = { ...output, [project.title]: projectTasks };
+  });
+
+  return output;
 }
 
 export default PersonDetailsPage;

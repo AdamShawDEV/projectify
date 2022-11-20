@@ -8,7 +8,7 @@
   flex-direction: column;
   align-items: center;
   height: 100%;
-  background-color: red;
+  background-color: #979797ff;
 }
 
 .detailsColumn img {
@@ -17,7 +17,6 @@
 }
 
 .activeTasksColumn {
-  background-color: blue;
   height: 100%;
   flex-grow: 1;
   padding-left: 0.4rem;
