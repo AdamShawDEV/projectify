@@ -14,6 +14,7 @@
 .detailsColumn img {
   border-radius: 50%;
   margin: 0.4rem;
+  max-width: 15rem;
 }
 
 .activeTasksColumn {

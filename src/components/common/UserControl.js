@@ -9,7 +9,7 @@ import {
 import { useUser } from "./useUserContext";
 import Menu from "./Menu";
 import MenuItem from "./MenuItem";
-import { noUserImageUri } from "../../consts";
+import UserImage from "./UserImage";
 
 function UserControl() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -39,7 +39,10 @@ function UserControl() {
         {currentUser ? (
           <>
             <span>{`${currentUser.firstName} ${currentUser.lastName}`}</span>
-            <img src={noUserImageUri} alt="user" />
+            <UserImage
+              src={"/images/" + currentUser.image}
+              alt={currentUser.firstName}
+            />
           </>
         ) : (
           "Login"
@@ -50,10 +53,10 @@ function UserControl() {
           {!currentUserId ? (
             users.map((user) => (
               <MenuItem key={user.id} onClick={() => changeUser(user.id)}>
-                <img
-                  className={styles.userImage}
-                  src={`${user.image ? user.image : noUserImageUri}`}
-                  alt="user"
+                <UserImage
+                  styles={styles.userImage}
+                  src={"/images/" + user.image}
+                  alt={user.firstName}
                 />
                 <span>{`${user.firstName} ${user.lastName}`}</span>
               </MenuItem>

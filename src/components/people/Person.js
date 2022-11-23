@@ -1,7 +1,7 @@
 import styles from "./modules/Person.module.css";
-import { noUserImageUri } from "../../consts";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import UserImage from "../common/UserImage";
 
 function Person({ person }) {
   const navigate = useNavigate();
@@ -11,10 +11,10 @@ function Person({ person }) {
       className={styles.person}
       onClick={() => navigate(`/person/${person.id}`)}
     >
-      <img
-        className={styles.image}
-        src={`${person.image ? person.image : noUserImageUri}`}
-        alt="user"
+      <UserImage
+        styles={styles.image}
+        src={"/images/" + person.image}
+        alt={`${person.firstName} ${person.lastName}`}
       />
       <h2>{`${person.firstName} ${person.lastName}`}</h2>
     </div>

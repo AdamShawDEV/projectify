@@ -3,10 +3,10 @@ import styles from "./modules/Task.module.css";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import AddEditTaskForm from "./AddEditTaskForm";
 import TaskModal from "./TaskModal";
-import { noUserImageUri } from "../../consts";
 import PropTypes from "prop-types";
 import { selectAllPeople } from "../../redux/slices/peopleSlice";
 import { useSelector } from "react-redux";
+import UserImage from "../common/UserImage";
 
 const OPEN_MODAL = {
   NONE: "none",
@@ -35,10 +35,10 @@ function Task({ task }) {
         <h2>{task.title}</h2>
         <div className={styles.peopleContainer}>
           {owner && (
-            <img
-              className={styles.portrait}
-              src={owner.image ? owner.image : noUserImageUri}
-              alt="owner"
+            <UserImage
+              styles={styles.portrait}
+              src={"/images/" + owner.image}
+              alt={`${owner.firstName} ${owner.lastName}`}
             />
           )}
         </div>

@@ -2,6 +2,7 @@ import styles from "./modules/MessageList.module.css";
 import { noUserImageUri } from "../../consts";
 import PropTypes from "prop-types";
 import { useUser } from "../common/useUserContext";
+import UserImage from "../common/UserImage";
 
 function MessageList({ messages, people }) {
   const { userId } = useUser();
@@ -25,10 +26,10 @@ function MessageList({ messages, people }) {
                 : null
             }
           >
-            <img
-              src={`${sender.image ? sender.image : noUserImageUri}`}
-              alt="user"
-              style={
+            <UserImage
+              src={"/images/" + sender.image}
+              alt={`${sender.firstName}`}
+              styles={
                 userId === message.user
                   ? { left: "auto", right: "0.2rem" }
                   : null

@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import TaskList from "../project/TaskList";
 import Button from "../common/Button";
 import AddEditPeopleForm from "./AddEditPeopleForm";
+import UserImage from "../common/UserImage";
 
 function PersonDetailsPage() {
   const { personId } = useParams();
@@ -52,7 +53,10 @@ function PersonDetailsPage() {
   return (
     <div className={styles.columnsContainer}>
       <div className={styles.detailsColumn}>
-        <img src="/images/noimage.png" alt="person name" />
+        <UserImage
+          src={"/images/" + person.image}
+          alt={`${person.firstName} ${person.lastName}`}
+        />
         <span>
           <h1>
             {`${person.firstName} ${person.lastName}`}&nbsp;
