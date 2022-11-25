@@ -38,14 +38,6 @@ function NavMenu() {
                 People
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/about"
-                style={({ isActive }) => (isActive ? activeStyle : null)}
-              >
-                About
-              </NavLink>
-            </li>
           </ul>
         </Menu>
       )}

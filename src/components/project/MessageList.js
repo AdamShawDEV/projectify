@@ -1,5 +1,4 @@
 import styles from "./modules/MessageList.module.css";
-import { noUserImageUri } from "../../consts";
 import PropTypes from "prop-types";
 import { useUser } from "../common/useUserContext";
 import UserImage from "../common/UserImage";
