@@ -1,9 +1,14 @@
 import styles from "./modules/Menu.module.css";
 import PropTypes from "prop-types";
+import useHandleOusideClick from "../../hooks/useHandleOusideClick";
+import { useRef } from "react";
 
 function Menu({ closeMenu, side = "right", children }) {
+  const wrapperRef = useRef(null);
+  useHandleOusideClick(wrapperRef, closeMenu);
+
   return (
-    <div onClick={closeMenu}>
+    <div ref={wrapperRef} onClick={closeMenu}>
       <div
         className={styles.menu}
         style={side === "right" ? { right: ".4rem" } : { left: ".4rem" }}

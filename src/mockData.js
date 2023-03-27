@@ -77,8 +77,7 @@ const tasks = [
   {
     id: "8f0ds8f080s",
     title: "Find web hosting company",
-    details:
-      "This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not",
+    details: "Research and choose an appropriate web hosting provider.",
     status: "active",
     projectId: "dfsdf0s9f",
     owner: "ds08f0d8",
@@ -90,8 +89,7 @@ const tasks = [
   {
     id: "sd08s0f8",
     title: "Design our website",
-    details:
-      "This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not",
+    details: "Create the draft version of the website styles and UI guidlenes.",
     status: "active",
     projectId: "dfsdf0s9f",
     owner: "0d9s08f09s8g",
@@ -110,7 +108,7 @@ const tasks = [
     id: "ds8f0s89",
     title: "Build our website",
     details:
-      "This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not",
+      "Use the draft and UI styles guides to build the initial version of the website.",
     status: "pending",
     projectId: "dfsdf0s9f",
     owner: null,
@@ -123,7 +121,7 @@ const tasks = [
     id: "a-s90a9d",
     title: "Add content to website",
     details:
-      "This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not",
+      "Work with he content team to full in any additional content needed.",
     status: "pending",
     projectId: "dfsdf0s9f",
     owner: null,
@@ -135,8 +133,7 @@ const tasks = [
   {
     id: "asf809d8",
     title: "Publish website.",
-    details:
-      "This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not This is the first task but wiat it is not",
+    details: "After testing publish the website to the webserver. ",
     status: "pending",
     projectId: "dfsdf0s9f",
     owner: null,
