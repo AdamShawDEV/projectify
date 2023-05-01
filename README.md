@@ -13,4 +13,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Webste
 
-To view this project plese go to the [website](https://projectify.adamshaw.dev/) 
+To view this project in action please visit the [website](https://projectify.adamshaw.dev/) 
